@@ -1,29 +1,31 @@
 {% extends "website/base.html" %}
 {% load custom_tags %}
 {% block content %}
-<section class="">
-    <div class="flex flex-row justify-between">
-        <div></div>
+<section class="flex flex-col w-full w-full 2xl:w-1/2 mx-auto ">
+    <div class="grid grid-cols-{{players|length|add:1}}">
+        <div class=""></div>
         {% for player in players %}
-            <div class="bg-{% get_medal_color_by_position forloop.counter %}">{{ player.name }} / {{ player.win_rate }}%</div>
+            <div class="text-center bg-{% get_medal_color_by_position forloop.counter %}">{{ player.name }} / {{ player.win_rate }}%</div>
           {% endfor %}
     </div>
-    <div class="flex flex-row justify-between border-2 border-green-500 border-solid">
+    <div class="grid grid-cols-{{players|length|add:1}}">
         <div>Partida</div>
-        {% for _ in data_per_player|length|get_range %}
-            <div class="font-bold">Posición | Puntos</div>
+        {% for _ in players|length|get_range %}
+            <div class="font-bold text-center">Posición | Puntos</div>
         {% endfor %}
     </div>
-    <div class="flex flex-row justify-between border-2 border-red-500 border-solid">
+    <div class="flex flex-col border-2">
         {% for game_id,data in data_per_game.items %}
-            <div></div>
+        <div class="grid grid-cols-{{players|length|add:1}}">
+            <div> {{ game_id }}</div>
             {% for player_name,game_data in data.items %}
                 {% if game_data %}
-                    <div class="font-bold">{{ game_data.position }} | {{ game_data.score }} </div>
+                    <div class="text-center font-bold bg-{% get_medal_color_by_position game_data.position %}">{{ game_data.position }} | {{ game_data.score }} </div>
                 {% else %}
-                    <div>NONE</div>
+                    <div class="text-center">N/A</div>
                 {% endif %}
             {% endfor %}
+        </div>
         {% endfor %}
     </div>
     <div>{{data}}</div>

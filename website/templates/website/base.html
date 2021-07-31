@@ -1,4 +1,3 @@
-{% load tailwind_tags %}
 <!doctype html>
 <html lang="es">
   <head>
@@ -9,7 +8,7 @@
     {% endcomment %}
     <title>{% block title %}{% endblock %} | Kuevassonne</title>
 
-    {% tailwind_css %}
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
     {% block extra_css %}{% endblock %}
     {% block extra_js %}{% endblock %}
