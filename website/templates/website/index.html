@@ -1,0 +1,31 @@
+{% extends "website/base.html" %}
+{% load custom_tags %}
+{% block content %}
+<section class="">
+    <div class="flex flex-row justify-between">
+        <div></div>
+        {% for player in players %}
+            <div class="bg-{% get_medal_color_by_position forloop.counter %}">{{ player.name }} / {{ player.win_rate }}%</div>
+          {% endfor %}
+    </div>
+    <div class="flex flex-row justify-between border-2 border-green-500 border-solid">
+        <div>Partida</div>
+        {% for _ in data_per_player|length|get_range %}
+            <div class="font-bold">Posición | Puntos</div>
+        {% endfor %}
+    </div>
+    <div class="flex flex-row justify-between border-2 border-red-500 border-solid">
+        {% for game_id,data in data_per_game.items %}
+            <div></div>
+            {% for player_name,game_data in data.items %}
+                {% if game_data %}
+                    <div class="font-bold">{{ game_data.position }} | {{ game_data.score }} </div>
+                {% else %}
+                    <div>NONE</div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <div>{{data}}</div>
+</section>
+{% endblock %}

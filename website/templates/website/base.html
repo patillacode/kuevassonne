@@ -1,0 +1,33 @@
+{% load tailwind_tags %}
+<!doctype html>
+<html lang="es">
+  <head>
+
+    {% comment %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icons/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='icons/favicon.ico') }}" type="image/x-icon">
+    {% endcomment %}
+    <title>{% block title %}{% endblock %} | Kuevassonne</title>
+
+    {% tailwind_css %}
+
+    {% block extra_css %}{% endblock %}
+    {% block extra_js %}{% endblock %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body class="h-screen w-full">
+
+    <main class="flex flex-col w-full h-full">
+
+      <section class="w-full text-white bg-black mb-4">{% include "website/partials/nav.html" %}</section>
+
+      {% block content %}{% endblock %}
+
+      {#<section class="w-full z-10 mt-auto text-white bg-black">{% include "partials/footer.html"%}</section> #}
+
+    </main>
+  </body>
+  {% block extra_js_end %}{% endblock %}
+</html>
