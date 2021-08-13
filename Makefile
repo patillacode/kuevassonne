@@ -8,9 +8,7 @@ python-install:
 
 serve:
 	. venv/bin/activate && \
-	FLASK_APP=flaskr FLASK_ENV=development \
-	APP_SETTINGS=flaskr.config.DevelopmentConfig \
-	flask run --extra-files flaskr/templates/base.html
+	python manage.py runserver
 
 shell:
 	. venv/bin/activate && \
@@ -27,3 +25,17 @@ reset-db:
 	python manage.py createsuperuser --noinput && \
 	python manage.py makemigrations website && \
 	python manage.py migrate
+
+docker-reset:
+	echo "Stopping container..." && \
+	docker stop kuevassonne || true && \
+	echo "Deleting container..." && \
+	docker rm kuevassonne || true && \
+	echo "Deleting image..." && \
+	docker rmi kuevassonne || true && \
+	echo "Rebuilding image..." && \
+	docker build --tag kuevassonne . && \
+	echo "Running new image in new container..." && \
+	docker run -d --name kuevassonne --publish 5055:5055 kuevassonne && \
+	echo "Set restart on failure..." && \
+	docker update --restart=on-failure kuevassonne
