@@ -1,0 +1,22 @@
+{% extends "website/base.html" %}
+
+
+{% block title %}Crear partida{% endblock %}
+
+{% block content %}
+
+
+<section class="my-2">
+    <form class="w-full max-w-sm mx-auto" action="{% url 'create_game'%}" method="post">
+        {% csrf_token %}
+
+        <div class="flex items-center border-b border-teal-500 py-2 my-2">
+            {{ game_form.start_date }}
+            <input class="mx-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit" value="Crear Partida">
+        </div>
+    </form>
+</section>
+
+{% include 'website/partials/instructions.html' with step=2 %} 
+
+{% endblock %}

@@ -1,33 +1,52 @@
 {% extends "website/base.html" %}
 {% load custom_tags %}
+
+{% block title %}Inicio{% endblock %}
+
 {% block content %}
-<section class="flex flex-col w-full w-full 2xl:w-1/2 mx-auto ">
-    <div class="grid grid-cols-{{players|length|add:1}}">
-        <div class=""></div>
-        {% for player in players %}
-            <div class="text-center bg-{% get_medal_color_by_position forloop.counter %}">{{ player.name }} / {{ player.win_rate }}%</div>
-          {% endfor %}
+<section class="flex flex-col w-full xl:w-3/4 2xl:w-1/2 mx-auto font-sans">
+    <div class="my-2 p-2">
+        <h3 class="text-center mx-auto text-2xl py-2 font-bold">Bienvenido a Kuevassone</h3>
+        <p class="text-center text-xl">Nuestra pequeña <span class="italic">Kueva</span> digital para nuestras partidas de <a class="font-bold text-green-500 underline" href="https://es.wikipedia.org/wiki/Carcassonne_(juego)" target="_blank" title="">Carcassonne</a> </p>
     </div>
-    <div class="grid grid-cols-{{players|length|add:1}}">
-        <div>Partida</div>
-        {% for _ in players|length|get_range %}
-            <div class="font-bold text-center">Posición | Puntos</div>
-        {% endfor %}
-    </div>
-    <div class="flex flex-col border-2">
-        {% for game_id,data in data_per_game.items %}
-        <div class="grid grid-cols-{{players|length|add:1}}">
-            <div> {{ game_id }}</div>
-            {% for player_name,game_data in data.items %}
-                {% if game_data %}
-                    <div class="text-center font-bold bg-{% get_medal_color_by_position game_data.position %}">{{ game_data.position }} | {{ game_data.score }} </div>
-                {% else %}
-                    <div class="text-center">N/A</div>
-                {% endif %}
-            {% endfor %}
+    <div class="my-2 p-4">
+        <p class="text-center font-bold text-xl">Secciones</p>
+        <div class="my-2">  
+            <p><a class="font-bold underline hover:text-green-500" href="{% url 'create_player' %}">Crear Partida:</a> Aquí es dónde iniciaremos el proceso ante una nueva partida, pudiendo:</p>
+            <div class="flex flex-col">
+                <p class="italic ml-6">Crear perfiles de jugadores que no existan ya.</p>
+                <p class="italic ml-6">Crear una partida con la fecha y la hora de comienzo.</p>
+                <p class="italic ml-6">Asignar expansiones a la nueva partida.</p>
+                <p class="italic ml-6">Asignar jugadores a la nueva partida.</p>
+            </div>
         </div>
-        {% endfor %}
+        <div class="my-2">
+            <p><a class="font-bold underline hover:text-green-500" href="{% url 'games' %}">Partidas:</a> Un histórico de todas las partidas jugadas dónde poder ver los jugadores de esa partida, los puntos de cada jugador en la misma y desde dónde podemos entrar a un análisis más detallado de cada una.</p>
+        </div>
+        <div class="my-2">
+            <p><a class="font-bold underline hover:text-green-500" href="{% url 'players' %}">Jugadores:</a> Dónde se pueden ver algunas estadísticas de cada jugador, como porcentaje de victorias o sus posiciones en partidas, por ejemplo.</p>
+        </div>
+        <div class="my-2">
+            <p><a class="font-bold underline hover:text-green-500" href="{% url 'records' %}">Records:</a> Una sección donde apuntaremos los caminos más largos, las ciudades de más puntos y otros datos <span class="italic">de récord</span>.</p>
+        </div>
+        <div class="my-2">
+            <p><a class="font-bold underline hover:text-green-500" href="{% url 'admin:index' %}">Admin:</a> Únicamente para acceder a la base de datos y corregir algún error/fallo del sistema.</p>
+        </div>
     </div>
-    <div>{{data}}</div>
+    <div class="flex flex-col justify-start my-2 p-4">
+        <p class="text-left italic underline">Links de interés</p>
+
+        <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://wikicarpedia.com/index.php/Main_Page/es" title="">WikiCarpedia</a> (Instrucciones)</p>
+
+        <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.carcassonnecentral.com/community/" title="">Carcassonne Central</a> (Foros/Comunidad)</p>
+        
+        <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.hans-im-glueck.de/_Resources/Persistent/5e28ae929b2a02bb8feccd2e2315c98f2ed58d9b/CarcBasis_SoloRegel_9_E.pdf" title="">Solo variant</a> (Instrucciones <span class="italic">Forever alone</span>)</p>
+        
+        <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.hans-im-glueck.de/en/games/carcassonne-en.html" title="">Hans Im Glück</a> (Creador)</p>
+        
+        <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://cundco.de/en/" title="">Cundco</a> (tienda)
+        </p>
+
+    </div>
 </section>
 {% endblock %}

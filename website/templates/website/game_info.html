@@ -1,0 +1,66 @@
+{% extends "website/base.html" %}
+{% load static custom_tags %}
+
+{% block title %}{{ game.name }}{% endblock %}
+
+{% block content %}
+    <section class="flex flex-col w-full xl:w-3/4 2xl:w-1/2 mx-auto">
+        <div class="my-4">
+            <p class="text-2xl font-bold text-center">{{ game.name }}</p>
+            <p class="text-sm italic text-center">{{ game.date }}</p>
+        </div>
+        <div class="flex">
+            <div class="w-1/2 grid grid-cols-2 items-center border-2 border-solid my-2 mx-2 p-4">
+                <div class="items-center text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p class="text-center font-bold inline-block">Duración</p>
+                </div>
+                <div class="items-center text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <p class="text-center font-bold inline-block">Turno medio</p> 
+                </div>
+                <p class="text-center">{{ game.duration }}</p>
+                <p class="text-center">{{ game.avg_seconds_per_turn }} segundos</p>
+            </div>
+            <div class="w-1/2 flex flex-col border-2 border-solid my-2 mx-2 p-4 text-center">
+                <div class="flex mx-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <p class="font-bold mx-2">Podio</p>
+                </div>
+
+                <div class="grid grid-cols-2">
+                    {% for name, data in game.podium.items %}
+                        {% with meeple_url='assets/meeple_'|add:data.color|add:'.png' %}
+                            <p class="flex items-center mx-auto {% if forloop.counter is 1 %}col-span-3{% endif %}">
+                                <img class="max-h-8" src="{% static meeple_url %}" alt="">
+                                <span class="text-xl font-extrabold text-{{ data.color }}-500 mx-1">{{ name }}</span>
+                                <span>({{ data.score }})</span>
+                            </p>
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            </div>
+            
+        </div>
+
+        {% if expansions_in_game %}
+            {% include 'website/partials/expansions_box.html' %}
+        {% endif %}
+
+        {% if game_images %}
+            {% include 'website/partials/images_box.html' %}
+        {% endif %}
+
+        {% if records %}
+            {% include 'website/partials/records_box.html' %}
+        {% endif %}
+
+    </section>
+{% endblock %}

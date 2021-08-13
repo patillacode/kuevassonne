@@ -1,0 +1,37 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}Añadir expansiones{% endblock %}
+
+{% block content %}
+
+    <section class="my-2">
+        <form class="w-full max-w-md mx-auto" action="{% url 'create_expansions_in_game' game_id %}" method="post">
+            {% csrf_token %}
+            
+                <div class="grid grid-cols-4 text-center my-2">
+                    <p class="font-bold italic col-span-2">Expansión</p>
+                    <p class="font-bold italic">Losetas</p>
+                    <p class="font-bold italic">Reglas</p>
+                </div>
+                <div class="grid grid-cols-4 text-center">
+                    <p class="col-span-2">{{ expansions_in_game_form.expansion }}</p>
+                    <p class="">{{ expansions_in_game_form.use_rules }}</p>
+                    <p class="">{{ expansions_in_game_form.use_tiles }}</p>
+                </div>
+                <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full max-w-md mx-auto my-4" type="submit" name="another_expansion" value="Añadir">
+        </form>
+
+        {% if expansions_in_game %}
+            <div class="w-full max-w-md mx-auto">
+                {% include 'website/partials/expansions_box.html' %}
+            </div>
+        {% endif %}
+            
+    </section>
+    
+    <a href="{% url 'create_players_in_game' game_id %}" class="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full max-w-md mx-auto text-center">Siguiente paso</a>
+    
+    {% include 'website/partials/instructions.html' with step=3 %}
+
+{% endblock %}

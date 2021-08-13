@@ -1,0 +1,38 @@
+{% load custom_tags %}
+
+{% for player in players %}
+    {% get_position_chart_data player.id as data %}
+    <script>
+
+        var bars{{ player.name }} = {
+            type: 'bar',
+            data: {
+              labels: {{ chart.labels|safe }},
+              datasets: [{
+                label: 'Veces en esta posición',
+                backgroundColor: [
+                    '#FDE047', '#D4D4D8', '#CA8A04', '#FB7185'
+                ],
+                data: {{ data|safe }}
+              }]          
+            },
+            options: {
+              responsive: true,
+              legend: {
+                display: false,
+                position: 'top',
+              },
+              title: {
+                display: false,
+                text: 'Diagrama de posiciones'
+              }
+            }
+        };
+
+        windowLoad(function() {
+          var barsctx{{ player.id }} = document.getElementById('bar-chart-{{player.id}}').getContext('2d');
+          window.barschart{{ player.id }} = new Chart(barsctx{{ player.id }}, bars{{ player.name }});
+        });
+
+    </script>
+{% endfor %}

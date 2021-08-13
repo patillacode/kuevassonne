@@ -1,0 +1,30 @@
+{% load custom_tags %}
+
+{% for player in players %}
+    {% get_position_chart_data player.id as data %}
+    <script>
+
+        var pie{{ player.name }} = {
+          type: 'pie',
+          data: {
+            datasets: [{
+              data: {{ data|safe }},
+              backgroundColor: [
+                '#FDE047', '#D4D4D8', '#CA8A04', '#FB7185'
+              ],
+              label: 'Posición'
+            }],
+            labels: {{ chart.labels|safe }}
+          },
+          options: {
+            responsive: true
+          }
+        };
+
+        windowLoad(function() {
+          var piectx{{ player.id }} = document.getElementById('pie-chart-{{player.id}}').getContext('2d');
+          window.piechart{{ player.id }} = new Chart(piectx{{ player.id }}, pie{{ player.name }});
+        });
+
+    </script>
+{% endfor %}

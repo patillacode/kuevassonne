@@ -3,7 +3,9 @@
 
 <ul class="flex flex-row flex-nowrap justify-between items-center p-6 max-w-screen-md mx-auto">
     <li class="w-auto"><a href="{% url 'index' %}"><img class="max-h-8" src="{% static 'assets/carcassonne_simple_logo.png' %}" alt="Carcassonne Logo"></a></li>
-    <li class="w-auto"><a href="{% url 'create' %}">Crear Partida</a></li>
+    <li class="w-auto"><a href="{% url 'create_player' %}">Crear Partida</a></li>
     <li class="w-auto"><a href="{% url 'games' %}">Partidas</a></li>
+    <li class="w-auto"><a href="{% url 'players' %}">Jugadores</a></li>
     <li class="w-auto"><a href="{% url 'records' %}">Records</a></li>
+    <li class="w-auto"><a target="_blank" href="{% url 'admin:index' %}">Admin</a></li>
 </ul>

@@ -1,0 +1,91 @@
+{% extends "website/base.html" %}
+{% load static custom_tags %}
+
+{% block extra_css %}
+    <style type="text/css" media="screen"> 
+        input:checked ~ .dot {
+          transform: translateX(100%);
+          background-color: #ff6900;
+        }
+    </style>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+{% endblock %}
+
+{% block title %}Jugadores{% endblock %}
+
+{% block content %}
+<section class="flex flex-col w-full 2xl:w-1/2 mx-auto">
+    <div class="flex justify-around">
+        <p class="text-center font-bold text-2xl mx-4 my-4">Jugadores</p>
+        <label for="toggle-charts" class="my-4 mr-4 ml-auto flex items-center cursor-pointer">
+            <!-- toggle -->
+            <div class="relative">
+              <!-- input -->
+              <input id="toggle-charts" type="checkbox" class="sr-only" onchange="toggleCharts()">
+              <!-- line -->
+              <div class="block bg-black w-14 h-8 rounded-full"></div>
+              <!-- dot -->
+              <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+            </div>
+            <!-- label -->
+            <div class="ml-3 text-gray-700 font-medium">
+              Gráficas
+            </div>
+          </label>
+    </div>
+    <div class="grid grid-cols-2 gap-4 w-full p-4 m-2">   
+        {% for player in players %}
+            <div class="flex border-2 border-solid">
+                <div class="flex flex-col justify-around p-4 w-1/3">
+                    <p class="font-bold text-2xl text-center">{{ player.name }}</p>
+                    <p>Victorias: <span class="font-bold">{{ player.wins }}</span></p>
+                    <p>Win Rate: <span class="font-bold">{{ player.win_rate }}</span> %</p>
+                </div>
+                <div class="w-2/3 p-2">
+                    <div class="bars-chart-container">
+                        <canvas id="bar-chart-{{player.id}}"></canvas>
+                    </div>
+                    <div class="hidden pie-chart-container">
+                        <canvas id="pie-chart-{{player.id}}"></canvas>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js_end %}
+    <script>
+        function toggleCharts() {
+            console.log('entro');
+          var pie_chart_containers = document.getElementsByClassName("pie-chart-container");
+          var bars_chart_containers = document.getElementsByClassName("bars-chart-container");
+          if(document.getElementById("toggle-charts").checked === true){
+              for(var i = 0; i < pie_chart_containers.length; i++){
+                pie_chart_containers[i].classList.toggle('hidden');
+                bars_chart_containers[i].classList.toggle('hidden');
+              }
+          } else {
+              for(var i = 0; i < pie_chart_containers.length; i++){
+                pie_chart_containers[i].classList.toggle('hidden');
+                bars_chart_containers[i].classList.toggle('hidden');
+              }
+          }
+        }
+
+        const windowLoad = callback => {
+            
+            if (window.addEventListener)
+                window.addEventListener("load", callback, false);
+            else
+                window.attachEvent("onload", callback);
+        }
+    </script>
+
+    {% include 'website/partials/player_bar_chart.html' with players=players %}
+    {% include 'website/partials/player_pie_chart.html' with players=players %}
+{% endblock %}

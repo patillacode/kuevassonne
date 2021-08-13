@@ -1,0 +1,57 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}Añadir jugadores{% endblock %}
+
+{% block content %}
+    
+    <section class="my-4">
+        <form class="w-full max-w-sm mx-auto" action="{% url 'create_players_in_game' game_id %}" method="post">
+            {% csrf_token %}
+            
+            <div class="flex p-2">
+
+                <div class="grid grid-cols-2 items-center gap-2">
+                    <p class="text-right">Jugador:</p>
+                    <p>{{ players_in_game_form.player }}</p>
+                    <p class="text-right">Color:</p>
+                    <p>{{ players_in_game_form.color }}</p>
+                </div>
+
+                <div class="mx-2">
+                    <input class="w-full h-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" type="submit" name="another_player" value="Añadir">
+                </div>
+                
+            </div>
+
+            {% if players_in_game %}
+
+                <div class="flex flex-col w-12/12 border-solid border-2 my-2 p-4 w-full max-w-md mx-auto">
+                    <div class="items-center mx-auto items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <p class="text-center font-bold inline-block">Jugadores añadidos</p>
+                    </div>
+
+                    {% for player in players_in_game %}
+                        <div class="grid grid-cols-2 text-center items-center w-1/2 mx-auto my-2">
+                            {% with meeple_url='assets/meeple_'|add:player.color|lower|add:'.png' %}
+                                <p class="text-right"><img class="max-h-8" src="{% static meeple_url %}" alt=""></p>
+                                <p class="text-left">{{ player.player }}</p>
+                            {% endwith %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+            {% endif %}
+
+            
+            <a href="{% url 'in_game' game_id %}" class="w-full text-center inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">Iniciar partida</a>
+        
+        </form>
+    </section>
+
+    {% include 'website/partials/instructions.html' with step=4 %}
+
+{% endblock %}
