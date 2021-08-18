@@ -17,6 +17,8 @@ shell:
 reset-db:
 	. venv/bin/activate && \
 	rm -rf db.sqlite3 && \
+	dropdb kuevassonne && \
+	createdb kuevassonne && \
 	rm -rf website/migrations/*.py && \
 	python manage.py migrate && \
 	export DJANGO_SUPERUSER_PASSWORD='deved' && \

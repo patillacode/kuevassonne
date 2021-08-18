@@ -13,20 +13,28 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@(%x2%-nrvl1*t*e7wfy3b47(&)43tv4pszq@($qb8hw6nsus$'
+SECRET_KEY = env('SECRET_KEY', default='development-secret-key')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', '.patilla.es']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
+INTERNAL_IPS = ['127.0.0.1']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -81,7 +89,19 @@ WSGI_APPLICATION = 'kuevassonne.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': BASE_DIR / 'db.sqlite3'}
+    # 'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': BASE_DIR / 'db.sqlite3'},
+    'default': {
+        'ENGINE': env(
+            'DATABASE_ENGINE', default='django.db.backends.postgresql'
+        ),  # , 'django.db.backends.sqlite3'),
+        'NAME': env(
+            'DATABASE_NAME', default='kuevassonne'
+        ),  # , os.path.join(BASE_DIR, 'db.sqlite3')),
+        'USER': env('DATABASE_USER', default=None),  # , 'user'),
+        'PASSWORD': env('DATABASE_PASSWORD', default=None),  # , 'password'),
+        'HOST': env('DATABASE_HOST', default='localhost'),  # , 'localhost'),
+        'PORT': env('DATABASE_PORT', default='5432'),  # , '5432'),
+    },
 }
 
 
@@ -125,9 +145,6 @@ STATICFILES_DIRS = [BASE_DIR / 'website']
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-INTERNAL_IPS = ['127.0.0.1']
 
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
