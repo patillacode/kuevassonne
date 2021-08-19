@@ -8,8 +8,8 @@ python-install:
 
 docker-setup:
 	python manage.py collectstatic --no-input && \
-	python manage.py migrate && \
-	python manage.py createsuperuser --noinput
+	python manage.py migrate
+# 	python manage.py createsuperuser --noinput
 
 docker-reset:
 	docker-compose down --volumes && \
