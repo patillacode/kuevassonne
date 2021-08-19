@@ -16,7 +16,7 @@ services:
     - ./kuevassonne:/usr/src/kuevassonne
     ports:
       - "5055:5055"
-    restart: on-failure
+    restart: always
     depends_on:
       - postgres
 
