@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Initialise environment variables
-env = environ.Env()
+env = environ.Env(ALLOWED_HOSTS=(list, []))
 environ.Env.read_env()
 
 
@@ -33,7 +33,7 @@ SECRET_KEY = env('SECRET_KEY', default='development-secret-key')
 # # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = env('ALLOWED_HOSTS', default=['0.0.0.0', 'localhost', '127.0.0.1'])
 INTERNAL_IPS = ['127.0.0.1']
 
 MEDIA_URL = '/media/'
