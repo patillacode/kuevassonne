@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    env_file:
+      - ./kuevassonne/.env.data
+  website:
+    build: .
+    command: bash -c "make docker-setup && gunicorn --workers=1 kuevassonne.wsgi -b 0.0.0.0:5055"
+    env_file:
+      - ./kuevassonne/.env.prod
+    volumes:
+    - ./kuevassonne:/usr/src/kuevassonne
+    ports:
+      - "5055:5055"
+    restart: on-failure
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:

@@ -264,9 +264,7 @@ def in_game(request, game_id, feedback_message=None):
             uploaded_image = form.cleaned_data['image']
             image_name = form.cleaned_data['name']
             game = Game.objects.get(pk=game_id)
-            image = Image.objects.create(
-                image=uploaded_image, name=image_name, game=game
-            )
+            image = Image.objects.create(image=uploaded_image, name=image_name, game=game)
             feedback_message = {
                 'message': (
                     f'Imagen subida (<a target="_blank" href="{image.image.url}">'
@@ -333,7 +331,8 @@ def finalize(request, game_id):
         feedback_message = {'message': (err), 'color': 'red'}
         return in_game(request, game_id, feedback_message)
 
-    request.session.flush()
+    # request.session.flush()
+    request.session.pop('players_points')
     return game_info(request, game.id)
 
 
