@@ -11,6 +11,7 @@ docker-setup:
 	python manage.py migrate
 
 docker-reset:
+	git pull origin main && \
 	docker-compose build && \
 	docker-compose up -d --remove-orphans
 
