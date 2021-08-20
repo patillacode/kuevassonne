@@ -121,7 +121,7 @@ class Game(models.Model):
                 '"end_date" before finalising a game.'
             )
 
-        players_in_game = self.game_players.filter(game=self)
+        players_in_game = self.game_players.filter(game=self).order_by('-score')
         if not players_in_game:
             raise Exception('There are no players in this game. Weird...')
 
@@ -163,9 +163,7 @@ class PlayerInGame(models.Model):
     player = models.ForeignKey(
         Player, on_delete=models.CASCADE, related_name='player_games'
     )
-    game = models.ForeignKey(
-        Game, on_delete=models.CASCADE, related_name='game_players'
-    )
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game_players')
     score = models.IntegerField(default=0)
     position = models.IntegerField(default=0)
     color = models.CharField(
@@ -220,6 +218,4 @@ class Record(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(default=None)
     description = models.TextField()
-    game = models.ForeignKey(
-        Game, on_delete=models.CASCADE, related_name='game_records'
-    )
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game_records')

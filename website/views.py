@@ -188,8 +188,6 @@ def create_game(request):
         if form.is_valid():
             game_start_date = form.cleaned_data['start_date']
             game = Game.objects.create(start_date=game_start_date)
-            # feedback_message = {'message': f'{game} creada', 'color': 'green'}
-            # context = {'feedback_message': feedback_message}
             return redirect(
                 reverse('create_expansions_in_game', kwargs={'game_id': game.id})
             )
@@ -246,10 +244,12 @@ def create_players_in_game(request, game_id):
 
 @login_required
 def in_game(request, game_id, feedback_message=None):
-    players_in_game = PlayerInGame.objects.filter(game__id=game_id)
+    players_in_game = PlayerInGame.objects.filter(game__id=game_id).order_by(
+        'player__name'
+    )
 
     session_key = 'players_points'
-    if request.session.get(session_key, None) is None:
+    if not request.session.get(session_key):
         request.session[session_key] = {}
         for player in players_in_game:
             player_name = player.player.name.lower()
@@ -331,8 +331,9 @@ def finalize(request, game_id):
         feedback_message = {'message': (err), 'color': 'red'}
         return in_game(request, game_id, feedback_message)
 
-    # request.session.flush()
-    request.session.pop('players_points')
+    finally:
+        del request.session['players_points']
+
     return game_info(request, game.id)
 
 
