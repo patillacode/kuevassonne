@@ -31,10 +31,17 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY', default='development-secret-key')
 
 # # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(env('DEBUG', default=1))
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS', default=['0.0.0.0', 'localhost', '127.0.0.1'])
 INTERNAL_IPS = ['127.0.0.1']
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [BASE_DIR / 'website']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -132,14 +139,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'website' / 'sdist'
-STATICFILES_DIRS = [BASE_DIR / 'website']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

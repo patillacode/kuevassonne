@@ -15,7 +15,7 @@ docker-reset:
 	docker-compose down --volumes && \
 	docker rmi kuevassonne_website || true && \
 	docker-compose build && \
-	docker-compose up --build --remove-orphans
+	docker-compose up --remove-orphans
 
 serve:
 	. venv/bin/activate && \
