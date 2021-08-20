@@ -17,7 +17,7 @@
 {% block title %}Jugadores{% endblock %}
 
 {% block content %}
-<section class="flex flex-col w-full 2xl:w-1/2 mx-auto">
+<section class="flex flex-col w-full mx-auto">
     <div class="flex justify-around">
         <p class="text-center font-bold text-2xl mx-4 my-4">Jugadores</p>
         <label for="toggle-charts" class="my-4 mr-4 ml-auto flex items-center cursor-pointer">
@@ -61,7 +61,6 @@
 {% block extra_js_end %}
     <script>
         function toggleCharts() {
-            console.log('entro');
           var pie_chart_containers = document.getElementsByClassName("pie-chart-container");
           var bars_chart_containers = document.getElementsByClassName("bars-chart-container");
           if(document.getElementById("toggle-charts").checked === true){
