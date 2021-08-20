@@ -12,7 +12,7 @@ docker-setup:
 
 docker-reset:
 	docker-compose build && \
-	docker-compose up --remove-orphans
+	docker-compose up -d --remove-orphans
 
 docker-full-reset:
 	docker-compose down --volumes && \
