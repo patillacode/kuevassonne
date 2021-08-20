@@ -10,7 +10,7 @@
     <div class="grid grid-cols-{{players_in_game|length}} border-2 border-black border-solid z-10 w-full mx-auto p-2 bg-white">
         {% for player in players_in_game %}
             <div class="flex items-center font-bold text-center justify-center">
-            	{% with meeple_url='assets/meeple_'|add:player.color|add:'.png' %}
+            	{% with meeple_url='assets/meeple_'|add:player.color|lower|add:'.png' %}
             		<img class="max-h-6 mr-2" src="{% static meeple_url %}" alt="">
     			{% endwith %}
             	<p class="flex items-center">
