@@ -16,6 +16,7 @@ services:
       - ./kuevassonne/.env.prod
     volumes:
       - ./kuevassonne:/usr/src/kuevassonne
+      - media:/kuevassonne/media
     ports:
       - "5055:5055"
     depends_on:

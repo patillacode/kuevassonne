@@ -37,7 +37,7 @@
 
                 <div class="grid grid-cols-2">
                     {% for player_in_game in players_in_game %}
-                        {% with meeple_url='assets/meeple_'|add:player_in_game.color|add:'.png' %}
+                        {% with meeple_url='assets/meeple_'|add:player_in_game.color|lower|add:'.png' %}
                             {% if forloop.counter < 4 %}
                                 <p class="flex items-center mx-auto {% if forloop.counter is 1 %}col-span-2{% endif %}">
                                     <img class="max-h-8" src="{% static meeple_url %}" alt="">
