@@ -1,4 +1,4 @@
-{% load static %}
+{% load static custom_tags %}
 <!doctype html>
 <html lang="es">
   <head>
@@ -18,8 +18,34 @@
 
   </head>
 
-  <body class="h-screen w-full">
+  <style>
 
+    img.background-image {
+      /* Set rules to fill background */
+      min-height: 100%;
+      min-width: 1024px;
+
+      /* Set up proportionate scaling */
+      width: 100%;
+      height: auto;
+
+      /* Set up positioning */
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    @media screen and (max-width: 1024px) { /* Specific to this particular image */
+      img.background-image {
+        left: 50%;
+        margin-left: -512px;   /* 50% */
+      }
+    }
+  </style>
+
+  <body class="h-screen w-full">
+    <img src="/static/assets/backgrounds/{% get_random_wallpaper %}" class="background-image" alt="">
     <main class="flex flex-col w-full h-full">
 
       <section class="w-full text-white bg-black fixed z-20">{% include "website/partials/nav.html" %}</section>
@@ -39,7 +65,9 @@
           </section>
         {% endif %}
       {% endblock %}
-      {% block content %}{% endblock %}
+      <section class="border-2 border-solid max-w-4xl bg-white mx-auto my-auto p-4 rounded-lg">
+        {% block content %}{% endblock %}
+      </section>
 
     </main>
   </body>

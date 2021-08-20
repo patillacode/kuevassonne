@@ -4,13 +4,13 @@
 {% block title %}{{ game.name }}{% endblock %}
 
 {% block content %}
-    <section class="flex flex-col w-full xl:w-3/4 2xl:w-1/2 mx-auto">
+    <section class="flex flex-col w-full mx-auto min-w-max">
         <div class="my-4">
             <p class="text-2xl font-bold text-center">{{ game.name }}</p>
             <p class="text-sm italic text-center">{{ game.date }}</p>
         </div>
-        <div class="w-full border-solid border-2 my-2 mx-auto p-4 flex">
-            <div class="w-1/2 grid grid-cols-2 items-center my-2 mx-2 p-4">
+        <div class="w-full my-2 mx-auto p-4 flex">
+            <div class="w-1/2 grid grid-cols-2 items-center my-2 mx-2 p-8 border-solid border-2">
                 <div class="items-center text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -27,22 +27,30 @@
                 <p class="text-center">{{ game.duration }}</p>
                 <p class="text-center">{{ game.avg_seconds_per_turn }} segundos</p>
             </div>
-            <div class="w-1/2 flex flex-col my-2 mx-2 p-4 text-center">
+            <div class="w-1/2 flex flex-col my-2 mx-2 p-4 text-center border-solid border-2">
                 <div class="flex mx-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
-                    <p class="font-bold mx-2">Podio</p>
+                    <p class="font-bold mx-2">Participantes</p>
                 </div>
 
                 <div class="grid grid-cols-2">
-                    {% for name, data in game.podium.items %}
-                        {% with meeple_url='assets/meeple_'|add:data.color|add:'.png' %}
-                            <p class="flex items-center mx-auto {% if forloop.counter is 1 %}col-span-3{% endif %}">
-                                <img class="max-h-8" src="{% static meeple_url %}" alt="">
-                                <span class="text-xl font-extrabold text-{{ data.color }}-500 mx-1">{{ name }}</span>
-                                <span>({{ data.score }})</span>
-                            </p>
+                    {% for player_in_game in players_in_game %}
+                        {% with meeple_url='assets/meeple_'|add:player_in_game.color|add:'.png' %}
+                            {% if forloop.counter < 4 %}
+                                <p class="flex items-center mx-auto {% if forloop.counter is 1 %}col-span-2{% endif %}">
+                                    <img class="max-h-8" src="{% static meeple_url %}" alt="">
+                                    <span class="{% if forloop.counter is 1 %}text-2xl{% else %}text-xl{% endif %} mx-1">{{ forloop.counter }}º <span class="{% if forloop.counter is 1 %}font-extrabold{% else %}font-bold{% endif %} text-{{ player_in_game.color|lower }}-500">{{ player_in_game.player.name }}</span></span>
+                                    <span>({{ player_in_game.score }})</span>
+                                </p>
+                            {% else %}
+                                <p class="flex items-center mx-auto">
+                                    <img class="max-h-6" src="{% static meeple_url %}" alt="">
+                                    <span class="text-md mx-1">{{ forloop.counter }}º <span class="text-{{ player_in_game.color|lower }}-500">{{ player_in_game.player.name }}</span></span>
+                                    <span>({{ player_in_game.score }})</span>
+                                </p>
+                            {% endif %}
                         {% endwith %}
                     {% endfor %}
                 </div>

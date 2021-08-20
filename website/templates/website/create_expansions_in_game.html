@@ -16,8 +16,8 @@
                 </div>
                 <div class="grid grid-cols-4 text-center">
                     <p class="col-span-2">{{ expansions_in_game_form.expansion }}</p>
-                    <p class="">{{ expansions_in_game_form.use_rules }}</p>
                     <p class="">{{ expansions_in_game_form.use_tiles }}</p>
+                    <p class="">{{ expansions_in_game_form.use_rules }}</p>
                 </div>
                 <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full max-w-md mx-auto my-4" type="submit" name="another_expansion" value="Añadir">
         </form>
@@ -30,7 +30,7 @@
             
     </section>
     
-    <a href="{% url 'create_players_in_game' game_id %}" class="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full max-w-md mx-auto text-center">Siguiente paso</a>
+    <a href="{% url 'create_players_in_game' game_id %}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full max-w-md m-auto text-center block">Siguiente paso</a>
     
     {% include 'website/partials/instructions.html' with step=3 %}
 

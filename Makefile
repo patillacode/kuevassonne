@@ -9,9 +9,12 @@ python-install:
 docker-setup:
 	python manage.py collectstatic --no-input && \
 	python manage.py migrate
-# 	python manage.py createsuperuser --noinput
 
 docker-reset:
+	docker-compose build && \
+	docker-compose up --remove-orphans
+
+docker-full-reset:
 	docker-compose down --volumes && \
 	docker rmi kuevassonne_website || true && \
 	docker-compose build && \

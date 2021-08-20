@@ -1,4 +1,8 @@
+import os
+import random
+
 from django import template
+from django.conf import settings
 
 register = template.Library()
 
@@ -22,6 +26,13 @@ def get_medal_color_by_position(position):
 @register.simple_tag(takes_context=True)
 def get_points_list(context, player_in_game_name):
     return context['players_points'][player_in_game_name.lower()]['point_list']
+
+
+@register.simple_tag(takes_context=False)
+def get_random_wallpaper():
+    return random.choice(
+        os.listdir(os.path.join(settings.BASE_DIR, 'website/static/assets/backgrounds/'))
+    )
 
 
 @register.simple_tag(takes_context=True)
