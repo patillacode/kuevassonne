@@ -30,8 +30,9 @@ class CreatePlayerForm(forms.ModelForm):
             'name': forms.TextInput(
                 attrs={
                     'class': (
-                        'appearance-none bg-transparent border-none w-full'
+                        'appearance-none border-black border-b-2 border-solid w-full'
                         ' text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none'
+                        ' bg-transparent'
                     ),
                     'placeholder': 'Nombre del jugador',
                 }
@@ -113,9 +114,9 @@ class RecordForm(forms.ModelForm):
             'name': forms.TextInput(
                 attrs={
                     'class': (
-                        'appearance-none bg-transparent border-none w-full'
+                        'appearance-none bg-transparent w-full'
                         ' text-gray-700 mx-auto py-1 px-2 leading-tight'
-                        ' focus:outline-none'
+                        ' focus:outline-none border-b-2 border-solid border-black'
                     ),
                     'placeholder': 'Nombre del récord (opcional)',
                 }

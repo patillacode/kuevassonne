@@ -24,49 +24,12 @@ from .models import (
 )
 
 
-def get_general_standings_per_game(players):
-    all_games = Game.objects.all().order_by('-id')
-    all_players = players
-
-    player_data = {}
-
-    for game in all_games:
-        player_data[game.id] = {}
-
-        all_players_in_game = PlayerInGame.objects.filter(game=game).order_by(
-            '-player__win_rate'
-        )
-        for player_in_game in all_players_in_game:
-
-            for player in all_players:
-
-                if player.name not in player_data[game.id].keys():
-                    player_data[game.id][player.name] = None
-
-                if player_in_game.player == player:
-                    player_data[game.id][player_in_game.player.name] = {
-                        'position': player_in_game.position,
-                        'score': player_in_game.score,
-                    }
-    return player_data
-
-
-def process_data_per_player(general_standings):
-    data_per_player = {}
-    for player_name, game_data in general_standings.items():
-        data_per_player[player_name] = []
-        for game_id, data in game_data.items():
-            data_per_player[player_name].append(data)
-
-    return data_per_player
-
-
 def games(request, feedback_message=None):
-    players = Player.objects.all().order_by('-win_rate')
-
     context = {
-        'players': players,
-        'data_per_game': get_general_standings_per_game(players),
+        'games': Game.objects.filter(finalised=True).order_by('-id'),
+        'number_of_players_in_system': Player.objects.filter(games__gt=0)
+        .distinct('name')
+        .count(),
         'feedback_message': feedback_message,
     }
     return render(request, 'website/games.html', context)
@@ -81,7 +44,7 @@ def players(request, player_id=None):
     if player_id:
         pass
     else:
-        all_players = Player.objects.all()
+        all_players = Player.objects.filter(games__gt=0).distinct('name')
 
         chart_labels = ['Oro', 'Plata', 'Bronce', 'otros']
         chart_data = {}
@@ -96,7 +59,7 @@ def players(request, player_id=None):
             ]
 
         context = {
-            'players': all_players.order_by('-win_rate'),
+            'players': all_players,
             'chart': {'labels': chart_labels, 'data': chart_data},
         }
         return render(request, 'website/players.html', context)
@@ -119,7 +82,6 @@ def create_player(request):
             }
 
     context = {
-        # 'game_form': CreateGameForm(initial={'start_date': datetime.datetime.now()}),
         'player_form': CreatePlayerForm(),
         'feedback_message': feedback_message,
     }

@@ -8,7 +8,7 @@
 <section class="flex flex-col w-10/12 mx-auto my-2">
 
     <form action="{% url 'add_record' %}" method="post" enctype="multipart/form-data">
-        <div class="flex flex-col w-full max-w-sm mx-auto my-4 py-4 border-b-2 border-solid">
+        <div class="flex flex-col w-full max-w-sm mx-auto my-4 py-4">
     		{% csrf_token %}
     		<div class="flex flex-col justify-between gap-4 tex-center">
                 {{ record_form.name }}
