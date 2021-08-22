@@ -33,19 +33,18 @@
             <p><a class="font-bold underline hover:text-green-500" href="{% url 'admin:index' %}">Admin:</a> Únicamente para acceder a la base de datos y corregir algún error/fallo del sistema.</p>
         </div>
     </div>
-    <div class="flex flex-col justify-start my-2 p-4">
-        <p class="text-left italic underline">Links de interés</p>
-
-        <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://wikicarpedia.com/index.php/Main_Page/es" title="">WikiCarpedia</a> (Instrucciones)</p>
-
-        <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.carcassonnecentral.com/community/" title="">Carcassonne Central</a> (Foros/Comunidad)</p>
-        
-        <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.hans-im-glueck.de/_Resources/Persistent/5e28ae929b2a02bb8feccd2e2315c98f2ed58d9b/CarcBasis_SoloRegel_9_E.pdf" title="">Solo variant</a> (Instrucciones <span class="italic">Forever alone</span>)</p>
-        
-        <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.hans-im-glueck.de/en/games/carcassonne-en.html" title="">Hans Im Glück</a> (Creador)</p>
-        
-        <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://cundco.de/en/" title="">Cundco</a> (tienda)</p>
-        <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.meeplesource.com/" title="">MeepleSource</a> (tienda)</p>
+    <div class="grid grid-cols-2 justify-start my-2 p-4">
+        <p class="text-left italic underline col-span-2">Links de interés</p>
+        <div>
+            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://wikicarpedia.com/index.php/Main_Page/es" title="">WikiCarpedia</a> (Instrucciones)</p>
+            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.carcassonnecentral.com/community/" title="">Carcassonne Central</a> (Foros/Comunidad)</p>
+            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.hans-im-glueck.de/_Resources/Persistent/5e28ae929b2a02bb8feccd2e2315c98f2ed58d9b/CarcBasis_SoloRegel_9_E.pdf" title="">Solo variant</a> (Instrucciones <span class="italic">Forever alone</span>)</p>
+        </div>
+        <div>
+            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.hans-im-glueck.de/en/games/carcassonne-en.html" title="">Hans Im Glück</a> (Creador)</p>
+            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://cundco.de/en/" title="">Cundco</a> (tienda)</p>
+            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.meeplesource.com/" title="">MeepleSource</a> (tienda)</p>
+        </div>
     </div>
 </section>
 {% endblock %}
