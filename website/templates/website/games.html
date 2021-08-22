@@ -46,14 +46,14 @@
             </p>
         </div>
     {% for game in games %}
-        <div class="grid grid-cols-7 border-solid border-t-2 border-black {% if forloop.last %}border-b-2{% endif %} hover:bg-red-200 hover:font-bold">
-            <p class="text-center w-full">
+        <div class="grid grid-cols-7 border-solid border-l-2 border-r-2 border-t-2 border-black {% if forloop.last %}border-b-2{% endif %} hover:bg-yellow-300 hover:font-bold">
+            <p class="text-center w-full border-solid border-black">
                 <a class="underline hover:text-red-700 font-bold" href="{% url 'game_info' game.id %}">Partida {{ game.id }}</a>
             </p>
             <a class="grid grid-cols-6 col-span-6" href="{% url 'game_info' game.id %}">
             {% for player in game.game_players.all %}
                 {% with meeple_url='assets/meeple_'|add:player.color|lower|add:'.png' %}
-                    <p class="flex items-center text-center mx-auto border-solid border-r-2 border-black w-full bg-white bg-opacity-60">
+                    <p class="flex items-center text-center mx-auto border-solid border-l-2 border-black w-full">
                         <img class="ml-2 mr-1 max-h-4" src="{% static meeple_url %}" alt="">
                         {{ player.player.name }} <span class="text-{{player.color|lower}}-500 italic ml-1">({{ player.score }})</span>
                     </p>
