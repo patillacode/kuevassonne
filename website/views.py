@@ -296,7 +296,7 @@ def finalize(request, game_id):
     finally:
         del request.session['players_points']
 
-    return game_info(request, game.id)
+    return redirect(reverse('game_info', kwargs={'game_id': game.id}))
 
 
 def game_info(request, game_id):

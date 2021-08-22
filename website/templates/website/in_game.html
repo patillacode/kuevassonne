@@ -7,7 +7,7 @@
 {% block content %}
 <section class="relative flex flex-col min-w-lg mx-auto my-2">
 
-    <div class="grid grid-cols-{{players_in_game|length}} border-2 border-black border-solid z-10 w-full mx-auto p-2 bg-white">
+    <div class="grid grid-cols-{{players_in_game|length}} z-10 w-full mx-auto p-2">
         {% for player in players_in_game %}
             <div class="flex items-center font-bold text-center justify-center">
             	{% with meeple_url='assets/meeple_'|add:player.color|lower|add:'.png' %}
@@ -20,12 +20,12 @@
         {% endfor %}
     </div>
 
-    <div class="grid grid-cols-{{players_in_game|length}} z-0 overflow-auto w-full">
+    <div class="grid grid-cols-{{players_in_game|length}} w-full">
     	{% for player in players_in_game %}
 			<div class="">
     			{% get_points_list player.player.name as point_list %}
     			{% for points in point_list %}
-	    			<div class="text-center text-md border-r-2 border-b-2 border-solid border-gray-200">{{ points }}</div>
+	    			<div class="text-center text-md border-r-2 border-b-2 border-solid border-black">{{ points }}</div>
 	    		{% endfor %}
 			</div>
 		{% endfor %}
