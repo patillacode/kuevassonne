@@ -194,13 +194,6 @@ class ExpansionInGame(models.Model):
     use_rules = models.BooleanField()
     use_tiles = models.BooleanField(default=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=['expansion', 'game'], name='expansion_only_once_per_game'
-            )
-        ]
-
     def __str__(self):
         return f'Partida {self.game.id} - {self.expansion.name}'
 
