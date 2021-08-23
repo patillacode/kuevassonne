@@ -31,7 +31,7 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY', default='development-secret-key')
 
 # # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(env('DEBUG', default=1))
+DEBUG = bool(env('DEBUG', default=0))
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS', default=['0.0.0.0', 'localhost', '127.0.0.1'])
 INTERNAL_IPS = ['127.0.0.1']
