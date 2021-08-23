@@ -6,10 +6,11 @@
         <p class="text-center font-bold inline-block">Expansiones</p>
     </div>
 
-    <div class="w-full grid grid-cols-3 text-center">
+    <div class="w-full grid grid-cols-4 text-center">
         <p class="font-bold italic">Nombre</p>
         <p class="font-bold italic">Losetas ({{ total_number_of_tiles }})</p>
         <p class="font-bold italic">Reglas</p>
+        <p class="font-bold italic">Mini</p>
     </div>
     {% for expansion in expansions_in_game %}
         {% include 'website/partials/expansion.html' %}
