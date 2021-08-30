@@ -56,6 +56,11 @@
     		</div>
 		</form>
     </div>
+
+    {% if game_images %}
+        {% include 'website/partials/images_box.html' %}
+    {% endif %}
+
     <div>
     	<form action="{% url 'finalize' game.id %}" method="post" class="flex">
     		{% csrf_token %}

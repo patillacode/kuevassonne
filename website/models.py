@@ -27,8 +27,20 @@ class Expansion(models.Model):
         'Game', through='ExpansionInGame', blank=True, related_name='expansions'
     )
 
+    class Meta:
+        ordering = ['is_mini', 'name', 'number_of_tiles']
+
     def __str__(self):
-        return self.name
+        tiles_text = ''
+        size_text = 'Ω  '
+
+        if self.number_of_tiles:
+            tiles_text = f' ({self.number_of_tiles})'
+
+        if self.is_mini:
+            size_text = '∆  '
+
+        return f'{size_text}{self.name}{tiles_text}'
 
 
 class Player(models.Model):

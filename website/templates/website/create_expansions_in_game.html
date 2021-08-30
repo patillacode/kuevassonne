@@ -10,7 +10,7 @@
             {% csrf_token %}
             
                 <div class="grid grid-cols-4 text-center my-2">
-                    <p class="font-bold italic col-span-2">Expansión</p>
+                    <p class="font-bold italic col-span-2">Expansión *</p>
                     <p class="font-bold italic">Losetas</p>
                     <p class="font-bold italic">Reglas</p>
                 </div>
@@ -34,4 +34,8 @@
     
     {% include 'website/partials/instructions.html' with step=3 %}
 
+    <div class="flex justify-center gap-2">
+        <p>*Ω = expansiones</p>
+        <p>*∆ = miniexpansiones</p>
+    </div>
 {% endblock %}

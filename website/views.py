@@ -98,13 +98,10 @@ def create_expansions_in_game(request, game_id):
 
         if form.is_valid():
             try:
-                expansion = Expansion.objects.get(name=form.cleaned_data['expansion'])
-                use_rules = form.cleaned_data['use_rules']
-                use_tiles = form.cleaned_data['use_tiles']
                 expansion_in_game = ExpansionInGame.objects.create(
-                    expansion=expansion,
-                    use_rules=use_rules,
-                    use_tiles=use_tiles,
+                    expansion=form.cleaned_data['expansion'],
+                    use_rules=form.cleaned_data['use_rules'],
+                    use_tiles=form.cleaned_data['use_tiles'],
                     game=game,
                 )
 
@@ -209,6 +206,7 @@ def in_game(request, game_id, feedback_message=None):
     players_in_game = PlayerInGame.objects.filter(game__id=game_id).order_by(
         'player__name'
     )
+    game = Game.objects.get(pk=game_id)
 
     session_key = 'players_points'
     if not request.session.get(session_key):
@@ -225,7 +223,6 @@ def in_game(request, game_id, feedback_message=None):
         if form.is_valid():
             uploaded_image = form.cleaned_data['image']
             image_name = form.cleaned_data['name']
-            game = Game.objects.get(pk=game_id)
             image = Image.objects.create(image=uploaded_image, name=image_name, game=game)
             feedback_message = {
                 'message': (
@@ -269,9 +266,10 @@ def in_game(request, game_id, feedback_message=None):
                     request.session[session_key][player_name]['point_list'].append(0)
 
     context = {
-        'players_in_game': players_in_game,
-        'game': Game.objects.get(pk=game_id),
         session_key: request.session.get(session_key),
+        'players_in_game': players_in_game,
+        'game': game,
+        'game_images': game.game_images.all(),
         'feedback_message': feedback_message,
         'images_form': ImageForm(),
     }
@@ -306,7 +304,9 @@ def game_info(request, game_id):
         'records': game.game_records.all(),
         'game_images': game.game_images.all(),
         'players_in_game': game.game_players.all(),
-        'expansions_in_game': game.game_expansions.all(),
+        'expansions_in_game': game.game_expansions.order_by(
+            'expansion__is_mini', 'expansion__name', 'expansion__number_of_tiles'
+        ),
         'total_number_of_tiles': game.total_number_of_tiles,
     }
     return render(request, 'website/game_info.html', context)
