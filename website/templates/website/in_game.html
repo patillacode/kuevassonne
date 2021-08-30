@@ -20,7 +20,20 @@
         {% endfor %}
     </div>
 
-    <div class="grid grid-cols-{{players_in_game|length}} w-full">
+    <div class="grid grid-cols-{{players_in_game|length}} w-full my-2 py-2 border-b-2 border-solid">
+        {% for player in players_in_game %}
+            <div class="text-center">
+                <form action="{% url 'in_game' game.id %}" method="post" class="flex flex flex-col" autocomplete="off">
+                    {% csrf_token %}
+                    <input type="hidden" name="player_id" value="{{player.id}}">
+                    <input class="border-4 border-solid border-{{player.color|lower}}{% if player.color != 'BLACK' %}-500{% endif %} text-center w-full mx-auto text-2xl" type="text" name="points_to_add" value="" placeholder="0">
+                    <input class="bg-{{player.color|lower}}{% if player.color != 'BLACK' %}-500{% endif %} hover:bg-{{ player.color|lower }}{% if player.color != 'BLACK' %}-700{% endif %} text-white font-bold py-2 px-4 w-full mx-auto" type="submit" value="a {{ player.player.name }}">
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="grid grid-cols-{{players_in_game|length}} w-full max-h-80 overflow-y-scroll">
     	{% for player in players_in_game %}
 			<div class="">
     			{% get_points_list player.player.name as point_list %}
@@ -30,19 +43,6 @@
 			</div>
 		{% endfor %}
     </div>	
-
-    <div class="grid grid-cols-{{players_in_game|length}} w-full my-2 py-2 border-b-2 border-solid">
-        {% for player in players_in_game %}
-            <div class="text-center">
-            	<form action="{% url 'in_game' game.id %}" method="post" class="flex">
-            		{% csrf_token %}
-            		<input type="hidden" name="player_id" value="{{player.id}}">
-            		<input class="text-center w-1/4 mx-auto text-2xl" type="text" name="points_to_add" value="" placeholder="0">
-            		<input class="bg-{{player.color|lower}}{% if player.color != 'BLACK' %}-300{% endif %} hover:bg-{{ player.color|lower }}{% if player.color != 'BLACK' %}-500{% endif %} text-white font-bold py-2 px-4 rounded-full w-3/4 mx-auto" type="submit" value="a {{ player.player.name }}">
-				</form>
-            </div>
-        {% endfor %}
-    </div>
 
     <div class="grid grid-cols-2 w-full max-w-sm mx-auto my-4 py-4 border-b-2 border-solid">
     	<form class="flex " action="{% url 'in_game' game.id %}" method="post" class="flex" enctype="multipart/form-data">
