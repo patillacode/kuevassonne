@@ -270,6 +270,10 @@ def in_game(request, game_id, feedback_message=None):
         'players_in_game': players_in_game,
         'game': game,
         'game_images': game.game_images.all(),
+        'expansions_in_game': game.game_expansions.order_by(
+            'expansion__is_mini', 'expansion__name', 'expansion__number_of_tiles'
+        ),
+        'total_number_of_tiles': game.total_number_of_tiles,
         'feedback_message': feedback_message,
         'images_form': ImageForm(),
     }

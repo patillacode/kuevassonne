@@ -57,6 +57,10 @@
 		</form>
     </div>
 
+    {% if expansions_in_game %}
+        {% include 'website/partials/expansions_box.html' %}
+    {% endif %}
+
     {% if game_images %}
         {% include 'website/partials/images_box.html' %}
     {% endif %}
