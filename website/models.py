@@ -127,11 +127,7 @@ class Game(models.Model):
 
         self.total_time = (self.end_date - self.start_date).total_seconds()
         self.duration = str(datetime.timedelta(seconds=self.total_time)).split(".")[0]
-        self.avg_seconds_per_turn = (
-            self.total_time
-            / players_in_game.count()  # noqa: W503
-            / self.total_number_of_tiles  # noqa: W503
-        )
+        self.avg_seconds_per_turn = self.total_time / self.total_number_of_tiles
 
         # set some data for the players too
         max_points = 0
