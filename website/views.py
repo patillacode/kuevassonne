@@ -235,7 +235,7 @@ def in_game(request, game_id, feedback_message=None):
                 'color': 'green',
             }
         else:
-            feedback_message = {'message': {form.errors}, 'color': 'red'}
+            feedback_message = {'message': form.errors, 'color': 'red'}
 
     elif request.method == 'POST' and 'points_to_add' in request.POST:
 

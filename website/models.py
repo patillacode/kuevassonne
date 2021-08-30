@@ -199,6 +199,10 @@ class Image(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game_images')
 
+    @property
+    def description(self):
+        return self.name or self.image.name
+
     def __str__(self):
         return self.name or self.image.name
 
