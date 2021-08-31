@@ -6,16 +6,16 @@
         <p class="text-center font-bold inline-block">Expansiones</p>
     </div>
 
-    <div class="w-full grid grid-cols-4 text-center">
+    <div class="w-full grid grid-cols-{% if can_remove_expansion %}5{% else %}4{% endif %} text-center">
         <p class="font-bold italic col-span-2 text-left">Nombre</p>
         <p class="font-bold italic">Losetas ({{ total_number_of_tiles }})</p>
         <p class="font-bold italic">Reglas</p>
     </div>
     {% for expansion in expansions_in_game %}
-        {% include 'website/partials/expansion.html' %}
+        {% include 'website/partials/expansion.html' with can_remove_expansion=can_remove_expansion %}
     {% endfor %}
 
-    <div class="flex justify-center gap-2 italic text-sm">
+    <div class="flex justify-center gap-2 italic text-sm mt-4">
         <p>*Ω = expansiones</p>
         <p>*∆ = miniexpansiones</p>
     </div>

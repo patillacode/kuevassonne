@@ -23,8 +23,8 @@
         </form>
 
         {% if expansions_in_game %}
-            <div class="w-full max-w-md mx-auto">
-                {% include 'website/partials/expansions_box.html' %}
+            <div class="w-full max-w-2xl mx-auto">
+                {% include 'website/partials/expansions_box.html' with can_remove_expansion=1 %}
             </div>
         {% endif %}
             

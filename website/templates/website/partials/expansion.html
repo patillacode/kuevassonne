@@ -1,11 +1,14 @@
-<div class="grid grid-cols-4 text-center">
-    <p class="text-left col-span-2">
-        {% if expansion.expansion.is_mini is True %}
-        ∆
-        {% else %}
-        Ω
-        {% endif %}
-         {{ expansion.expansion.name }}</p>
+<div class="grid grid-cols-{% if can_remove_expansion %}5{% else %}4{% endif %} text-center">
+    <div class="flex text-left col-span-2">
+        <p class="mr-2">
+            {% if expansion.expansion.is_mini is True %}
+            ∆{{ can_remove_expansion }}
+            {% else %}
+            Ω{{ can_remove_expansion }}
+            {% endif %}
+            {{ expansion.expansion.name }}
+        </p>
+    </div>
     <p class="inline-block mx-auto flex text-center">
         {% if expansion.use_tiles is True %}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
@@ -21,4 +24,18 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
         {% endif%}
     </p>
+    {% if can_remove_expansion %}
+        <form action="{% url 'create_expansions_in_game' game_id %}" method="post" class="flex justify-end">
+            {% csrf_token %}
+            <label class="cursor-pointer text-right">
+                <input class="hidden" type="submit">
+                <input class="hidden" name="delete_expansion_in_game_id" value="{{ expansion.id }}">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 hover:text-white hover:bg-black rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </label>
+        </form>
+
+    {% endif %}
 </div>

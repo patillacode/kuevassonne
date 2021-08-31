@@ -14,7 +14,7 @@ from .forms import (
     RecordForm,
 )
 from .models import (
-    Expansion,
+    ALL_COLORS,
     ExpansionInGame,
     Game,
     Image,
@@ -94,37 +94,62 @@ def create_expansions_in_game(request, game_id):
     feedback_message = None
 
     if request.method == 'POST':
-        form = CreateExpansionInGameForm(request.POST)
-
-        if form.is_valid():
+        if request.POST.get('delete_expansion_in_game_id', None):
+            expansion_in_game = ExpansionInGame.objects.get(
+                id=request.POST['delete_expansion_in_game_id']
+            )
+            game_id = expansion_in_game.game.id
+            feedback_message = {
+                'message': ('Are you ok?'),
+                'color': 'yellow',
+            }
             try:
-                expansion_in_game = ExpansionInGame.objects.create(
-                    expansion=form.cleaned_data['expansion'],
-                    use_rules=form.cleaned_data['use_rules'],
-                    use_tiles=form.cleaned_data['use_tiles'],
-                    game=game,
-                )
-
-                game.calculate_tiles_for_game()
-
                 feedback_message = {
                     'message': (
-                        f'Expansión "{expansion_in_game.expansion.name}" añadida a'
-                        f' Partida {game.id}'
+                        f'Expansion "{expansion_in_game.expansion.name}" eliminada de la Partida '
+                        f'{game_id}'
                     ),
                     'color': 'green',
                 }
+                expansion_in_game.delete()
 
-            except IntegrityError as err:
+            except Exception as err:
                 feedback_message = {
-                    'message': (
-                        f'La expasión "{form.cleaned_data["expansion"]}" ya está en la '
-                        f'Partida {game_id}. {err}'
-                    ),
+                    'message': (f'WTF, llama a Dvitto: {err}'),
                     'color': 'red',
                 }
         else:
-            feedback_message = {'message': {form.errors}, 'color': 'red'}
+            form = CreateExpansionInGameForm(request.POST)
+
+            if form.is_valid():
+                try:
+                    expansion_in_game = ExpansionInGame.objects.create(
+                        expansion=form.cleaned_data['expansion'],
+                        use_rules=form.cleaned_data['use_rules'],
+                        use_tiles=form.cleaned_data['use_tiles'],
+                        game=game,
+                    )
+
+                    game.calculate_tiles_for_game()
+
+                    feedback_message = {
+                        'message': (
+                            f'Expansión "{expansion_in_game.expansion.name}" añadida a'
+                            f' Partida {game.id}'
+                        ),
+                        'color': 'green',
+                    }
+
+                except IntegrityError as err:
+                    feedback_message = {
+                        'message': (
+                            f'La expasión "{form.cleaned_data["expansion"]}" ya está en la '
+                            f'Partida {game_id}. {err}'
+                        ),
+                        'color': 'red',
+                    }
+            else:
+                feedback_message = {'message': form.errors, 'color': 'red'}
 
     context = {
         'game_id': game_id,
@@ -152,7 +177,7 @@ def create_game(request):
             )
 
         else:
-            feedback_message = {'message': {form.errors}, 'color': 'red'}
+            feedback_message = {'message': form.errors, 'color': 'red'}
 
     context = {
         'game_form': CreateGameForm(initial={'start_date': datetime.datetime.now()}),
@@ -162,40 +187,80 @@ def create_game(request):
 
 
 @login_required
-def create_players_in_game(request, game_id):
-    feedback_message = None
+def create_players_in_game(request, game_id, feedback_message=None):
 
     if request.method == 'POST':
-        form = CreatePlayerInGameForm(request.POST)
-        if form.is_valid():
+        if request.POST.get('delete_player_in_game_id', None):
+            player_in_game = PlayerInGame.objects.get(
+                id=request.POST['delete_player_in_game_id']
+            )
+            game_id = player_in_game.game.id
+
+            feedback_message = {
+                'message': ('Are you ok?'),
+                'color': 'yellow',
+            }
+
             try:
-                player_in_game = PlayerInGame.objects.create(
-                    player=Player.objects.get(name=form.cleaned_data['player']),
-                    color=form.cleaned_data['color'],
-                    game=Game.objects.get(pk=game_id),
-                )
                 feedback_message = {
                     'message': (
-                        f'"{player_in_game.player}" añadido a Partida '
-                        f'{player_in_game.game.id}'
+                        f'"{player_in_game.player}" eliminado de la Partida {game_id}'
                     ),
                     'color': 'green',
                 }
-            except IntegrityError:
+                player_in_game.delete()
+
+            except Exception as err:
                 feedback_message = {
-                    'message': (
-                        f'"{form.cleaned_data["player"]}" ya está en la partida o '
-                        'el color ya ha sido utilizado.'
-                    ),
+                    'message': (f'WTF, llama a Dvitto: {err}'),
                     'color': 'red',
                 }
         else:
-            feedback_message = {'message': {form.errors}, 'color': 'red'}
+            form = CreatePlayerInGameForm(request.POST)
+            if form.is_valid():
+                try:
+                    player_in_game = PlayerInGame.objects.create(
+                        player=Player.objects.get(name=form.cleaned_data['player']),
+                        color=form.cleaned_data['color'],
+                        game=Game.objects.get(pk=game_id),
+                    )
+                    feedback_message = {
+                        'message': (
+                            f'"{player_in_game.player}" añadido a Partida '
+                            f'{player_in_game.game.id}'
+                        ),
+                        'color': 'green',
+                    }
+                except IntegrityError:
+                    feedback_message = {
+                        'message': (
+                            f'"{form.cleaned_data["player"]}" ya está en la partida o '
+                            'el color ya ha sido utilizado.'
+                        ),
+                        'color': 'red',
+                    }
+            else:
+                feedback_message = {'message': form.errors, 'color': 'red'}
+
+    players_in_game_form = CreatePlayerInGameForm()
+    players_in_game_form.fields['player'].queryset = Player.objects.exclude(
+        id__in=PlayerInGame.objects.filter(game__id=game_id).values_list(
+            'player__id', flat=True
+        )
+    )
+
+    all_colors = ALL_COLORS
+    used_colors = [
+        (player_in_game.color.upper(), player_in_game.color.title())
+        for player_in_game in PlayerInGame.objects.filter(game__id=game_id)
+    ]
+    available_colors = [item for item in all_colors if item not in used_colors]
+    players_in_game_form.fields['color'].choices = available_colors
 
     context = {
         'game_id': game_id,
         'players_in_game': PlayerInGame.objects.filter(game__id=game_id),
-        'players_in_game_form': CreatePlayerInGameForm(),
+        'players_in_game_form': players_in_game_form,
         'feedback_message': feedback_message,
     }
     return render(request, 'website/create_players_in_game.html', context)
@@ -343,7 +408,7 @@ def add_record(request):
                 'color': 'green',
             }
         else:
-            feedback_message = {'message': {form.errors}, 'color': 'red'}
+            feedback_message = {'message': form.errors, 'color': 'red'}
 
     context = {'record_form': RecordForm(), 'feedback_message': feedback_message}
     return render(request, 'website/add_record.html', context)

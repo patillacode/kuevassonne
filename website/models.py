@@ -18,6 +18,9 @@ class Color(Enum):
         return self.name
 
 
+ALL_COLORS = [(tag.name, tag.value) for tag in Color]
+
+
 class Expansion(models.Model):
     name = models.CharField(max_length=255, unique=True)
     release_year = models.IntegerField()
@@ -174,9 +177,7 @@ class PlayerInGame(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game_players')
     score = models.IntegerField(default=0)
     position = models.IntegerField(default=0)
-    color = models.CharField(
-        max_length=7, choices=[(tag.name, tag.value) for tag in Color]
-    )
+    color = models.CharField(max_length=7, choices=ALL_COLORS)
 
     class Meta:
         constraints = [
