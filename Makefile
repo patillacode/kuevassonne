@@ -29,6 +29,13 @@ shell:
 	. venv/bin/activate && \
 	python manage.py shell
 
+reload-db:
+	dropdb kuevassonne && \
+	createdb kuevassonne && \
+	psql kuevassonne < database_backup.sql && \
+	. venv/bin/activate && \
+	python manage.py migrate
+
 reset-db:
 	. venv/bin/activate && \
 	rm -rf db.sqlite3 && \

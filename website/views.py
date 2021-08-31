@@ -2,7 +2,7 @@ import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.shortcuts import redirect, render, reverse
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.utils.timezone import make_aware
 
 from .forms import (
@@ -13,15 +13,7 @@ from .forms import (
     ImageForm,
     RecordForm,
 )
-from .models import (
-    ALL_COLORS,
-    ExpansionInGame,
-    Game,
-    Image,
-    Player,
-    PlayerInGame,
-    Record,
-)
+from .models import ALL_COLORS, ExpansionInGame, Game, Image, Player, PlayerInGame, Record
 
 
 def games(request, feedback_message=None):
@@ -95,8 +87,8 @@ def create_expansions_in_game(request, game_id):
 
     if request.method == 'POST':
         if request.POST.get('delete_expansion_in_game_id', None):
-            expansion_in_game = ExpansionInGame.objects.get(
-                id=request.POST['delete_expansion_in_game_id']
+            expansion_in_game = get_object_or_404(
+                ExpansionInGame, pk=request.POST['delete_expansion_in_game_id']
             )
             game_id = expansion_in_game.game.id
             feedback_message = {
@@ -191,8 +183,8 @@ def create_players_in_game(request, game_id, feedback_message=None):
 
     if request.method == 'POST':
         if request.POST.get('delete_player_in_game_id', None):
-            player_in_game = PlayerInGame.objects.get(
-                id=request.POST['delete_player_in_game_id']
+            player_in_game = get_object_or_404(
+                PlayerInGame, pk=request.POST['delete_player_in_game_id']
             )
             game_id = player_in_game.game.id
 
