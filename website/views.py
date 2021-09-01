@@ -16,6 +16,10 @@ from .forms import (
 from .models import ALL_COLORS, ExpansionInGame, Game, Image, Player, PlayerInGame, Record
 
 
+def index(request, feedback_message=None):
+    return render(request, 'website/index.html')
+
+
 def games(request, feedback_message=None):
     context = {
         'games': Game.objects.filter(finalised=True).order_by('-id'),
@@ -27,13 +31,9 @@ def games(request, feedback_message=None):
     return render(request, 'website/games.html', context)
 
 
-def index(request, feedback_message=None):
-    context = {}
-    return render(request, 'website/index.html', context)
-
-
 def players(request, player_id=None):
     if player_id:
+        # TODO: add a dedicated page for each player with a more deep analysis
         pass
     else:
         all_players = Player.objects.filter(games__gt=0).distinct('name')
@@ -98,8 +98,8 @@ def create_expansions_in_game(request, game_id):
             try:
                 feedback_message = {
                     'message': (
-                        f'Expansion "{expansion_in_game.expansion.name}" eliminada de la Partida '
-                        f'{game_id}'
+                        f'Expansion "{expansion_in_game.expansion.name}" eliminada '
+                        f'de la Partida {game_id}'
                     ),
                     'color': 'green',
                 }
@@ -122,8 +122,6 @@ def create_expansions_in_game(request, game_id):
                         game=game,
                     )
 
-                    game.calculate_tiles_for_game()
-
                     feedback_message = {
                         'message': (
                             f'Expansión "{expansion_in_game.expansion.name}" añadida a'
@@ -142,6 +140,8 @@ def create_expansions_in_game(request, game_id):
                     }
             else:
                 feedback_message = {'message': form.errors, 'color': 'red'}
+
+        game.calculate_tiles_for_game()
 
     context = {
         'game_id': game_id,
