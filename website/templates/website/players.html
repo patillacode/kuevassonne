@@ -1,15 +1,6 @@
 {% extends "website/base.html" %}
 {% load static custom_tags %}
 
-{% block extra_css %}
-    <style type="text/css" media="screen"> 
-        input:checked ~ .dot {
-          transform: translateX(100%);
-          background-color: #ff6900;
-        }
-    </style>
-{% endblock %}
-
 {% block extra_js %}
     <script src="{% static 'js/Chart.min.js' %}"></script>
 {% endblock %}
@@ -33,7 +24,7 @@
                     </div>
                     <div>
                         <p>Victorias: <span class="font-bold">{{ player.wins }}</span></p>
-                        <p>Win Rate: <span class="font-bold">{{ player.win_rate }}</span> %</p>
+                        <p>WR: <span class="font-bold">{{ player.win_rate }}</span> %</p>
                     </div>
                 </div>
                 <div class="bars-chart-container col-span-2">
