@@ -30,6 +30,7 @@ shell:
 	python manage.py shell
 
 reload-db:
+	scp totoro:~/projects/kuevassonne/database_backup.sql . && \
 	dropdb kuevassonne && \
 	createdb kuevassonne && \
 	psql kuevassonne < database_backup.sql && \
