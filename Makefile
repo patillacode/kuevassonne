@@ -1,4 +1,5 @@
 install: python-install
+reload-from-server: reload-db reload-media
 
 python-install:
 	python3 -m venv venv && \
@@ -30,12 +31,24 @@ shell:
 	python manage.py shell
 
 reload-db:
+	echo "Bringing latest db dump from server..." && \
 	scp totoro:~/projects/kuevassonne/database_backup.sql . && \
+	echo "Dropping local database 'kuevassonne'..."
 	dropdb kuevassonne && \
+	echo "Re-creating local database 'kuevassonne'..." && \
 	createdb kuevassonne && \
+	echo "Importing dump..." && \
 	psql kuevassonne < database_backup.sql && \
 	. venv/bin/activate && \
-	python manage.py migrate
+	echo "Running migrations..." && \
+	python manage.py migrate && \
+	echo "Latest data from server has been reloaded locally!"
+
+reload-media:
+	echo "Deleting local 'media' folder..." && \
+	rm -r ./media && \
+	echo "Bringing 'media' folder from server..." && \
+	scp -r totoro:~/projects/kuevassonne/media  .
 
 reset-db:
 	. venv/bin/activate && \
