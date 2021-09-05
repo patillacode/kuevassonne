@@ -2,12 +2,12 @@ import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
+from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.utils.timezone import make_aware
 
 from .forms import (
     CreateExpansionInGameForm,
-    CreateGameForm,
     CreatePlayerForm,
     CreatePlayerInGameForm,
     ImageForm,
@@ -36,10 +36,12 @@ def players(request, player_id=None):
         # TODO: add a dedicated page for each player with a more deep analysis
         pass
     else:
-        all_players = Player.objects.filter(games__gt=0).distinct('name')
+        all_players = Player.objects.filter(games__gt=0).order_by('-win_rate').distinct()
 
         chart_labels = ['Oro', 'Plata', 'Bronce', 'otros']
         chart_data = {}
+
+        players_global_data = []
 
         for player in all_players:
             player_games = player.player_games
@@ -50,8 +52,21 @@ def players(request, player_id=None):
                 player_games.exclude(position__in=[1, 2, 3]).count(),
             ]
 
+            players_global_data.append(
+                {
+                    'favourite_color': player.player_games.values('color')
+                    .annotate(frequency=Count('color'))
+                    .order_by('-frequency')[0]['color'],
+                    'games_played': player.player_games.count(),
+                    'wins': player.wins,
+                    'win_rate': player.win_rate,
+                    'id': player.id,
+                    'name': player.name,
+                }
+            )
+
         context = {
-            'players': all_players,
+            'players_global': players_global_data,
             'chart': {'labels': chart_labels, 'data': chart_data},
         }
         return render(request, 'website/players.html', context)

@@ -1,6 +1,6 @@
 {% load custom_tags %}
 
-{% for player in players %}
+{% for player in players_global %}
     {% get_position_chart_data player.id as data %}
     <script>
 

@@ -1,25 +1,6 @@
 from django import forms
 
-from .models import ExpansionInGame, Game, Image, Player, PlayerInGame, Record
-
-
-class CreateGameForm(forms.ModelForm):
-    start_date = forms.DateTimeField(help_text='(yyyy-mm-dd hh:mm:ss)')
-
-    class Meta:
-        model = Game
-        fields = ('start_date',)
-        widgets = {
-            'start_date': forms.TextInput(
-                attrs={
-                    'class': (
-                        'appearance-none bg-transparent border-none w-full'
-                        ' text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none'
-                    ),
-                    'placeholder': 'yyyy-mm-dd hh:mm:ss',
-                }
-            )
-        }
+from .models import ExpansionInGame, Image, Player, PlayerInGame, Record
 
 
 class CreatePlayerForm(forms.ModelForm):
