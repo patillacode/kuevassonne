@@ -42,6 +42,28 @@ def players(request, player_id=None):
         chart_data = {}
 
         players_global_data = []
+        players_three_man_game_data = []
+
+        three_man_data = (
+            Game.objects.annotate(players_count=Count('players'))
+            .order_by('-start_date')
+            .filter(players_count=3)
+        )
+        four_man_data = (
+            Game.objects.annotate(players_count=Count('players'))
+            .order_by('-start_date')
+            .filter(players_count=4)
+        )
+        five_man_data = (
+            Game.objects.annotate(players_count=Count('players'))
+            .order_by('-start_date')
+            .filter(players_count=5)
+        )
+        six_man_data = (
+            Game.objects.annotate(players_count=Count('players'))
+            .order_by('-start_date')
+            .filter(players_count=6)
+        )
 
         for player in all_players:
             player_games = player.player_games
@@ -65,8 +87,16 @@ def players(request, player_id=None):
                 }
             )
 
+            players_three_man_game_data = three_man_data.filter(
+                game_players__player=Player.objects.get(pk=player.id)
+            )
+
         context = {
             'players_global': players_global_data,
+            'three_man_data': three_man_data,
+            'four_man_data': four_man_data,
+            'five_man_data': five_man_data,
+            'six_man_data': six_man_data,
             'chart': {'labels': chart_labels, 'data': chart_data},
         }
         return render(request, 'website/players.html', context)
