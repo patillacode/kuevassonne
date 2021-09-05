@@ -9,7 +9,7 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def get_points_list(context, player_in_game_name):
-    return context['players_points'][player_in_game_name.lower()]['point_list']
+    return reversed(context['players_points'][player_in_game_name.lower()]['point_list'])
 
 
 @register.simple_tag(takes_context=False)
