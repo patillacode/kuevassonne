@@ -83,6 +83,9 @@ class Game(models.Model):
 
     finalised = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['-id']
+
     def __str__(self):
         return f'{self.name} ({self.date})'
 
