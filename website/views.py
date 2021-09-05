@@ -58,8 +58,7 @@ def players(request, player_id=None):
 
 
 @login_required
-def create_player(request):
-    feedback_message = None
+def create_player(request, feedback_message=None):
 
     if request.method == 'POST':
         form = CreatePlayerForm(request.POST)
@@ -158,24 +157,14 @@ def create_game(request):
 
     feedback_message = None
 
-    if request.method == 'POST':
-        form = CreateGameForm(request.POST)
+    try:
+        game = Game.objects.create(start_date=datetime.datetime.now())
+        return redirect(reverse('create_expansions_in_game', kwargs={'game_id': game.id}))
 
-        if form.is_valid():
-            game_start_date = form.cleaned_data['start_date']
-            game = Game.objects.create(start_date=game_start_date)
-            return redirect(
-                reverse('create_expansions_in_game', kwargs={'game_id': game.id})
-            )
+    except Exception as err:
+        feedback_message = {'message': err, 'color': 'red'}
 
-        else:
-            feedback_message = {'message': form.errors, 'color': 'red'}
-
-    context = {
-        'game_form': CreateGameForm(initial={'start_date': datetime.datetime.now()}),
-        'feedback_message': feedback_message,
-    }
-    return render(request, 'website/create_game.html', context)
+    return create_player(request, feedback_message)
 
 
 @login_required
@@ -267,6 +256,12 @@ def in_game(request, game_id, feedback_message=None):
 
     session_key = 'players_points'
     if not request.session.get(session_key):
+        # this is the first time we get to the "in_game" screen
+        # We set the current datetime to the Game
+        game.start_date = datetime.datetime.now()
+        game.save()
+
+        # And we set the sessions for scoring
         request.session[session_key] = {}
         for player in players_in_game:
             player_name = player.player.name.lower()
