@@ -11,23 +11,23 @@
         {% for player in players_in_game %}
             <div class="flex items-center font-bold text-center justify-center">
             	{% with meeple_url='assets/meeple_'|add:player.color|lower|add:'.png' %}
-            		<img class="max-h-6 mr-2" src="{% static meeple_url %}" alt="">
+            		<img class="max-h-10" src="{% static meeple_url %}" alt="">
     			{% endwith %}
-            	<p class="flex items-center">
+            	<p class="flex items-center ml-2">
             		<span class="text-xl mr-2">{{ player.player.name }}</span>
             		<span class="text-2xl">{% get_total_points player.player.name %}</span></p>
             </div>
         {% endfor %}
     </div>
 
-    <div class="grid grid-cols-{{players_in_game|length}} w-full my-2 py-2 border-b-2 border-solid">
+    <div class="gap-2 grid grid-cols-{{players_in_game|length}} w-full my-2 py-2 border-b-2 border-solid">
         {% for player in players_in_game %}
             <div class="text-center">
                 <form action="{% url 'in_game' game.id %}" method="post" class="flex flex flex-col" autocomplete="off">
                     {% csrf_token %}
                     <input type="hidden" name="player_id" value="{{player.id}}">
-                    <input class="border-4 border-solid border-{{player.color|lower}}{% if player.color != 'BLACK' %}-500{% endif %} text-center w-full mx-auto text-2xl" type="text" name="points_to_add" value="" placeholder="0">
-                    <input class="bg-{{player.color|lower}}{% if player.color != 'BLACK' %}-500{% endif %} hover:bg-{{ player.color|lower }}{% if player.color != 'BLACK' %}-700{% endif %} text-white font-bold py-2 px-4 w-full mx-auto" type="submit" value="a {{ player.player.name }}">
+                    <input class="border-4 border-solid border-{% get_color_conversion player.color %} text-center w-full mx-auto text-2xl" type="text" name="points_to_add" value="" placeholder="0">
+                    <input class="bg-{% get_color_conversion player.color %} border-2 border-solid border-transparent {% if player.color == 'BLACK' %}text-white{% else %}text-black{% endif %} font-bold py-2 px-4 w-full mx-auto transition duration-500 ease-in-out transform hover:translate-y-1 hover:scale-105" type="submit" value="a {{ player.player.name }}">
                 </form>
             </div>
         {% endfor %}
@@ -68,7 +68,7 @@
     <div>
     	<form action="{% url 'finalize' game.id %}" method="post" class="flex">
     		{% csrf_token %}
-    		<input class="bg-yellow-700 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full w-full mx-auto" type="submit" value="Finalizar Partida">
+    		<input class="bg-blue-300 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-full w-full mx-auto" type="submit" value="Finalizar Partida">
 		</form>
     </div>
 </section>

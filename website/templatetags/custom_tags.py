@@ -6,6 +6,23 @@ from django.conf import settings
 
 register = template.Library()
 
+COLOR_CONVERSION = {
+    'red': 'red-500',
+    'blue': 'blue-500',
+    'yellow': 'yellow',
+    'pink': 'pink-500',
+    'green': 'lime-600',
+    'black': 'black',
+    'orange': 'orange',
+    'white': 'white',
+    'brown': 'brown',
+}
+
+
+@register.simple_tag(takes_context=False)
+def get_color_conversion(player_color):
+    return COLOR_CONVERSION[player_color.lower()]
+
 
 @register.simple_tag(takes_context=True)
 def get_points_list(context, player_in_game_name):

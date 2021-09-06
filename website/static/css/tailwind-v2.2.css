@@ -313,6 +313,51 @@ video {
     }
 }
 
+.border-orange {
+    --tw-border-opacity: 1;
+    border-color: rgba(255, 105, 0, var(--tw-border-opacity))
+}
+.bg-orange {
+    --tw-bg-opacity: 1;
+    background-color: rgba(255, 105, 0, var(--tw-bg-opacity))
+}
+
+.border-brown {
+    --tw-border-opacity: 1;
+    border-color: rgba(180, 83, 9, var(--tw-border-opacity))
+}
+.bg-brown {
+    --tw-bg-opacity: 1;
+    background-color: rgba(180, 83, 9, var(--tw-bg-opacity))
+}
+
+.border-yellow {
+    --tw-border-opacity: 1;
+    border-color: rgba(255, 254, 0, var(--tw-border-opacity))
+}
+.bg-yellow {
+    --tw-bg-opacity: 1;
+    background-color: rgba(255, 254, 0, var(--tw-bg-opacity))
+}
+
+.border-lime-500 {
+    --tw-border-opacity: 1;
+    border-color: rgba(132, 204, 22, var(--tw-border-opacity))
+}
+.bg-lime-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(132, 204, 22, var(--tw-bg-opacity))
+}
+
+.border-lime-600 {
+    --tw-border-opacity: 1;
+    border-color: rgba(101, 163, 13, var(--tw-border-opacity))
+}
+.bg-lime-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(101, 163, 13, var(--tw-bg-opacity))
+}
+
 .sr-only {
     position: absolute;
     width: 1px;

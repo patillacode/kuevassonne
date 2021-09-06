@@ -13,6 +13,9 @@ class Color(Enum):
     PINK = 'Pink'
     GREEN = 'Green'
     BLACK = 'Black'
+    ORANGE = 'Orange'
+    WHITE = 'White'
+    BROWN = 'Brown'
 
     def __str__(self):
         return self.name
