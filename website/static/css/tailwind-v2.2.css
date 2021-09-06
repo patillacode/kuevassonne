@@ -321,6 +321,10 @@ video {
     --tw-bg-opacity: 1;
     background-color: rgba(255, 105, 0, var(--tw-bg-opacity))
 }
+.text-orange {
+    --tw-text-opacity: 1;
+    color: rgba(255, 105, 0, var(--tw-text-opacity))
+}
 
 .border-brown {
     --tw-border-opacity: 1;
@@ -329,6 +333,10 @@ video {
 .bg-brown {
     --tw-bg-opacity: 1;
     background-color: rgba(180, 83, 9, var(--tw-bg-opacity))
+}
+.text-brown {
+    --tw-text-opacity: 1;
+    color: rgba(180, 83, 9, var(--tw-text-opacity))
 }
 
 .border-yellow {
@@ -339,6 +347,10 @@ video {
     --tw-bg-opacity: 1;
     background-color: rgba(255, 254, 0, var(--tw-bg-opacity))
 }
+.text-yellow {
+    --tw-text-opacity: 1;
+    color: rgba(255, 254, 0, var(--tw-text-opacity))
+}
 
 .border-lime-500 {
     --tw-border-opacity: 1;
@@ -348,6 +360,10 @@ video {
     --tw-bg-opacity: 1;
     background-color: rgba(132, 204, 22, var(--tw-bg-opacity))
 }
+.text-lime-500 {
+    --tw-text-opacity: 1;
+    color: rgba(132, 204, 22, var(--tw-text-opacity))
+}
 
 .border-lime-600 {
     --tw-border-opacity: 1;
@@ -356,6 +372,10 @@ video {
 .bg-lime-600 {
     --tw-bg-opacity: 1;
     background-color: rgba(101, 163, 13, var(--tw-bg-opacity))
+}
+.text-lime-600 {
+    --tw-text-opacity: 1;
+    color: rgba(101, 163, 13, var(--tw-text-opacity))
 }
 
 .sr-only {
