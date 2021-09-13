@@ -26,6 +26,7 @@ def games(request, feedback_message=None):
         games.append(
             {
                 'id': game.id,
+                'draw': game.draw,
                 'game_players': game.game_players.all().order_by('-score'),
             }
         )
@@ -41,7 +42,7 @@ def games(request, feedback_message=None):
 
 def players(request, player_id=None):
     if player_id:
-        # TODO: add a dedicated page for each player with a more deep analysis
+        # TODO: add a dedicated page for each player with deeper statistic analysis
         pass
     else:
         all_players = Player.objects.filter(games__gt=0).order_by('-win_rate').distinct()

@@ -82,9 +82,9 @@ class Game(models.Model):
     total_number_of_tiles = models.IntegerField(blank=True, null=True)
 
     image = models.ImageField(blank=True)
-    winner = models.ForeignKey(Player, on_delete=models.CASCADE, blank=True, null=True)
 
     finalised = models.BooleanField(default=False)
+    draw = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-id']
@@ -112,10 +112,6 @@ class Game(models.Model):
             }
         return podium
 
-    @property
-    def winner_points(self):
-        return PlayerInGame.objects.get(game=self, player=self.winner).score
-
     def calculate_tiles_for_game(self):
         # after adding an expansion (where its tiles were used) to a game
         # we recalculate the number of tiles for that game
@@ -142,7 +138,7 @@ class Game(models.Model):
                 '"end_date" before finalising a game.'
             )
 
-        players_in_game = self.game_players.filter(game=self).order_by('-score')
+        players_in_game = self.game_players.order_by('-score')
         if not players_in_game:
             raise Exception('There are no players in this game. Weird...')
 
@@ -151,14 +147,13 @@ class Game(models.Model):
         self.avg_seconds_per_turn = self.total_time / self.total_number_of_tiles
 
         # set some data for the players too
-        max_points = 0
-        for player_in_game in players_in_game:
-            if player_in_game.score > max_points:
-                self.winner = player_in_game.player
-                max_points = player_in_game.score
-
-        self.winner.wins += 1
-        self.winner.save()
+        max_points = max(list(self.game_players.values_list('score', flat=True)))
+        winners = players_in_game.filter(score=max_points)
+        # In case there is a draw for first place, both players get a win
+        for winner in winners:
+            print('Winner', winner, type(winner))
+            winner.player.wins += 1
+            winner.player.save()
 
         for player_in_game in players_in_game:
             player = player_in_game.player
@@ -166,11 +161,19 @@ class Game(models.Model):
             player.win_rate = round((player.wins / games_played) * 100, 2)
             player.save()
 
-        for position, player_in_game in enumerate(
-            PlayerInGame.objects.filter(game=self).order_by('-score'), 1
-        ):
-            player_in_game.position = position
+        previous_player = None
+
+        for position, player_in_game in enumerate(players_in_game, 1):
+            # this is in case there are draws
+            # there could be two players with the same position (Game 16 is an example)
+            if previous_player and player_in_game.score == previous_player.score:
+                player_in_game.position = previous_player.position
+                self.draw = True
+            else:
+                player_in_game.position = position
+
             player_in_game.save()
+            previous_player = player_in_game
 
         self.finalised = True
         self.save()
