@@ -21,8 +21,16 @@ def index(request, feedback_message=None):
 
 
 def games(request, feedback_message=None):
+    games = []
+    for game in Game.objects.filter(finalised=True).order_by('-id'):
+        games.append(
+            {
+                'id': game.id,
+                'game_players': game.game_players.all().order_by('-score'),
+            }
+        )
     context = {
-        'games': Game.objects.filter(finalised=True).order_by('-id'),
+        'games': games,
         'number_of_players_in_system': Player.objects.filter(games__gt=0)
         .distinct('name')
         .count(),
@@ -374,7 +382,7 @@ def game_info(request, game_id):
         'game': game,
         'records': game.game_records.all(),
         'game_images': game.game_images.all(),
-        'players_in_game': game.game_players.all(),
+        'players_in_game': game.game_players.all().order_by('-score'),
         'expansions_in_game': game.game_expansions.order_by(
             'expansion__is_mini', 'expansion__name', 'expansion__number_of_tiles'
         ),

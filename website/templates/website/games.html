@@ -51,7 +51,7 @@
                 <a class="underline hover:text-red-700 font-bold" href="{% url 'game_info' game.id %}">Partida {{ game.id }}</a>
             </p>
             <a class="grid grid-cols-6 col-span-6" href="{% url 'game_info' game.id %}">
-            {% for player in game.game_players.all %}
+            {% for player in game.game_players %}
                 {% with meeple_url='assets/meeple_'|add:player.color|lower|add:'.png' %}
                     <p class="text-{% get_color_conversion player.color %} font-bold flex items-center text-center mx-auto border-solid border-l-2 border-black w-full">
                         <img class="ml-2 mr-1 max-h-4" src="{% static meeple_url %}" alt="">
