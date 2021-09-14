@@ -28,10 +28,13 @@
 }
 
 body {
-  background: url('/static/assets/backgrounds/main.jpg') no-repeat fixed center / cover;
+  background: url('/static/assets/backgrounds/main.jpg') no-repeat fixed center /
+    cover;
   color: white;
   min-height: 100vh;
-  cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/836/hearthstone-cursor.png) 10 2, auto;
+  cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/836/hearthstone-cursor.png)
+      10 2,
+    auto;
   display: grid;
 }
 
@@ -105,7 +108,7 @@ a:hover {
 
 @media only screen and (max-width: 999px) {
   .header__nav {
-    display: inline-grid
+    display: inline-grid;
     grid-gap: 10px;
     grid-auto-flow: column;
   }
