@@ -46,7 +46,7 @@
         </p>
     </div>
     {% for game in games %}
-        <div class="grid grid-cols-7 border-solid border-l-2 border-r-2 border-t-2 border-white {% if forloop.last %}border-b-2{% endif %} hover:bg-yellow-300 hover:font-bold bg-gray-300">
+        <div class="grid grid-cols-7 border-solid border-l-2 border-r-2 border-t-2 border-white {% if forloop.last %}border-b-2{% endif %} hover:bg-gold hover:font-bold bg-gray-300">
             <p class="text-center w-full border-solid border-white {% if game.draw == True %}bg-blue-200{% endif %}">
                 <a class="underline font-bold" href="{% url 'game_info' game.id %}">Partida {{ game.id }} {% if game.draw %}*{% endif %}</a>
             </p>
