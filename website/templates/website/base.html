@@ -4,7 +4,7 @@
   <head>
     <title>{% block title %}{% endblock %} | Kuevassonne</title>
 
-    <link href="{% static 'css/tailwind-v2.2.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dist.css' %}" rel="stylesheet">
 
     {% block extra_css %}{% endblock %}
     {% block extra_js %}{% endblock %}
@@ -44,13 +44,9 @@
     }
   </style>
 
-  <body class="h-screen w-full">
-    <img src="/static/assets/backgrounds/{% get_random_wallpaper %}" class="background-image" alt="">
-    <main class="flex flex-col w-full h-full">
-
-      <section class="w-full text-white bg-black fixed z-20">{% include "website/partials/nav.html" %}</section>
-      <div class="mt-20"></div>
-
+  <body class="bg-black text-white h-screen">
+    {% include "website/partials/header.html" %}
+    <main class="main">
       {% block feedback_message %}
         {% if feedback_message %}
           <section class="w-full mx-auto">
@@ -65,10 +61,7 @@
           </section>
         {% endif %}
       {% endblock %}
-      <section class="w-full max-w-4xl bg-white mx-auto my-16 p-4 rounded-lg bg-opacity-80 bg-gray-300">
-        {% block content %}{% endblock %}
-      </section>
-
+      {% block content %}{% endblock %}
     </main>
   </body>
   {% block extra_js_end %}{% endblock %}

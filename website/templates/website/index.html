@@ -4,37 +4,12 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-<section class="flex flex-col w-full mx-auto my-auto font-sans">
-    <div class="my-2 p-2">
-        <h3 class="text-center mx-auto text-2xl py-2 font-bold">Bienvenido a Kuevassone</h3>
-        <p class="text-center text-xl">Nuestra pequeña <span class="italic">Kueva</span> digital para nuestras partidas de <a class="font-bold text-green-500 underline" href="https://es.wikipedia.org/wiki/Carcassonne_(juego)" target="_blank" title="">Carcassonne</a> </p>
-    </div>
-    <div class="my-2 p-4">
-        <p class="text-center font-bold text-xl">Secciones</p>
-        <div class="my-2">  
-            <p><a class="font-bold underline hover:text-green-500" href="{% url 'create_player' %}">Crear Partida:</a> Aquí es dónde iniciaremos el proceso ante una nueva partida, pudiendo:</p>
-            <div class="flex flex-col">
-                <p class="italic ml-6">Crear perfiles de jugadores que no existan ya.</p>
-                <p class="italic ml-6">Crear una partida con la fecha y la hora de comienzo.</p>
-                <p class="italic ml-6">Asignar expansiones a la nueva partida.</p>
-                <p class="italic ml-6">Asignar jugadores a la nueva partida.</p>
-            </div>
-        </div>
-        <div class="my-2">
-            <p><a class="font-bold underline hover:text-green-500" href="{% url 'games' %}">Partidas:</a> Un histórico de todas las partidas jugadas dónde poder ver los jugadores de esa partida, los puntos de cada jugador en la misma y desde dónde podemos entrar a un análisis más detallado de cada una.</p>
-        </div>
-        <div class="my-2">
-            <p><a class="font-bold underline hover:text-green-500" href="{% url 'players' %}">Jugadores:</a> Dónde se pueden ver algunas estadísticas de cada jugador, como porcentaje de victorias o sus posiciones en partidas, por ejemplo.</p>
-        </div>
-        <div class="my-2">
-            <p><a class="font-bold underline hover:text-green-500" href="{% url 'records' %}">Records:</a> Una sección donde apuntaremos los caminos más largos, las ciudades de más puntos y otros datos <span class="italic">de récord</span>.</p>
-        </div>
-        <div class="my-2">
-            <p><a class="font-bold underline hover:text-green-500" href="{% url 'admin:index' %}">Admin:</a> Únicamente para acceder a la base de datos y corregir algún error/fallo del sistema.</p>
-        </div>
-    </div>
-    <div class="grid grid-cols-2 justify-start my-2 p-4">
-        <p class="text-left italic underline col-span-2">Links de interés</p>
+
+{% include "website/partials/hero.html" with title="Bienvenido a Kuevassone" %}
+
+<section class="block flex flex-col w-full mx-auto my-auto font-sans">
+    <div class="grid grid-cols-2 justify-start">
+      <h2 class="col-span-2">Links de interés</h2>
         <div>
             <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://wikicarpedia.com/index.php/Main_Page/es" title="">WikiCarpedia</a> (Instrucciones)</p>
             <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://carcassonneblog.wordpress.com/2015/04/01/las-reglas-en-espanol-de-todas-las-expansiones-de-carcassonne/" title="">Wordpress</a> (Instrucciones)</p>
