@@ -52,8 +52,13 @@ class Expansion(models.Model):
 class Player(models.Model):
     name = models.CharField(max_length=64, unique=True)
     wins = models.IntegerField(default=0)
+    losses = models.IntegerField(default=0)
+
     win_rate = models.FloatField(
         blank=True, null=True, help_text='Percentage of games won'
+    )
+    average_position = models.FloatField(
+        blank=True, null=True, help_text='Average position'
     )
     games = models.ManyToManyField(
         'Game', through='PlayerInGame', blank=True, related_name='players'
@@ -147,22 +152,25 @@ class Game(models.Model):
         self.avg_seconds_per_turn = self.total_time / self.total_number_of_tiles
 
         # set some data for the players too
-        max_points = max(list(self.game_players.values_list('score', flat=True)))
+
+        # Wins
+        max_points = max(list(players_in_game.values_list('score', flat=True)))
         winners = players_in_game.filter(score=max_points)
         # In case there is a draw for first place, both players get a win
         for winner in winners:
-            print('Winner', winner, type(winner))
             winner.player.wins += 1
             winner.player.save()
 
-        for player_in_game in players_in_game:
-            player = player_in_game.player
-            games_played = player.games.all().count()
-            player.win_rate = round((player.wins / games_played) * 100, 2)
-            player.save()
+        # Losses
+        min_points = min(list(players_in_game.values_list('score', flat=True)))
+        losers = players_in_game.filter(score=min_points)
+        # In case there is a draw for last place, both players get a loss
+        for loser in losers:
+            loser.player.losses += 1
+            loser.player.save()
 
+        # Positions
         previous_player = None
-
         for position, player_in_game in enumerate(players_in_game, 1):
             # this is in case there are draws
             # there could be two players with the same position (Game 16 is an example)
@@ -174,6 +182,20 @@ class Game(models.Model):
 
             player_in_game.save()
             previous_player = player_in_game
+
+        # Win Rate
+        for player_in_game in players_in_game:
+            player = player_in_game.player
+            games_played = player.games.count()
+            player.win_rate = round((player.wins / games_played) * 100, 2)
+            player.save()
+
+        # Average Position
+        for data in players_in_game.values('player').annotate(
+            average=models.Avg('position')
+        ):
+            player = Player.objects.get(pk=data['player'])
+            player.average_position = round(data['average'], 2)
 
         self.finalised = True
         self.save()

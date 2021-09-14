@@ -49,7 +49,7 @@ make install
 Or if you prefer to do things step by step, knowingly:
 ```bash
 # clone the repo
-git clone git@github.com:patillacode/relatos-a-medida.git
+git clone git@github.com:patillacode/kuevassonne.git
 
 # go into the project folder
 cd kuevassonne
