@@ -64,3 +64,8 @@ reset-db:
 	python manage.py createsuperuser --noinput && \
 	python manage.py makemigrations website && \
 	python manage.py migrate
+
+create-styles:
+	cd kuevassonne/website/static/css && \
+  npx tailwindcss -i styles.css -o dist.css --watch
+

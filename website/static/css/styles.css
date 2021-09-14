@@ -1,0 +1,162 @@
+/* website/static/css/styles.css */
+@tailwind base;
+@tailwind components;
+
+@layer base {
+  @font-face {
+    font-family: 'Beaufort';
+    src: url('/static/fonts/Beaufort-Bold.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Spiegel';
+    src: url('/static/fonts/Spiegel-Regular.woff') format('woff');
+  }
+}
+
+@tailwind utilities;
+
+/* Tailwind components */
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded bg-gold;
+    text-align: center;
+  }
+  .btn:hover {
+    box-shadow: inset 0 0 0 5px rgb(0 0 0 / 70%);
+  }
+}
+
+body {
+  background: url('/static/assets/backgrounds/main.jpg') no-repeat fixed center / cover;
+  color: white;
+  min-height: 100vh;
+  cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/836/hearthstone-cursor.png) 10 2, auto;
+  display: grid;
+}
+
+@media only screen and (max-width: 999px) {
+  body {
+    overflow-y: hidden;
+    grid-template-rows: 1fr 60px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  body {
+    overscroll-y: scroll;
+    grid-template-columns: 80px 1fr;
+  }
+}
+
+a:hover {
+  cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/836/hearthstone-click.png)
+      10 2,
+    auto;
+}
+
+.header {
+  position: sticky;
+  padding: 10px;
+  display: grid;
+  justify-items: center;
+}
+
+@media only screen and (max-width: 999px) {
+  .header {
+    height: 100%;
+    background: black;
+    width: 100%;
+    bottom: 0;
+    grid-row: 2;
+    grid-template-columns: auto 1fr auto;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .header {
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.33);
+    top: 0;
+    grid-template-rows: auto 1fr auto;
+  }
+}
+
+.header__logo {
+  align-self: center;
+  padding: 10px;
+  width: 100%;
+}
+
+@media only screen and (max-width: 999px) {
+  .header__logo {
+    width: 50px;
+  }
+}
+
+.header__nav {
+  align-self: center;
+  display: grid;
+  row-gap: 20px;
+  border-radius: 50px;
+  background: black;
+  padding: 10px;
+}
+
+@media only screen and (max-width: 999px) {
+  .header__nav {
+    display: inline-grid
+    grid-gap: 10px;
+    grid-auto-flow: column;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .header__nav {
+    width: 100%;
+  }
+}
+
+.header__nav a {
+  width: 100%;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background: #1a191a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;
+}
+
+.header__nav a svg {
+  width: 32px;
+}
+
+/* Hero */
+.hero {
+  margin-bottom: 3vh;
+}
+
+/* Main */
+@media only screen and (max-width: 999px) {
+  .main {
+    grid-row: 1;
+    overflow-y: scroll;
+    padding: 20px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .main {
+    padding: 50px;
+  }
+}
+
+.block {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50px;
+  padding: 5%;
+}
