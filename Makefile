@@ -65,7 +65,11 @@ reset-db:
 	python manage.py makemigrations website && \
 	python manage.py migrate
 
-create-styles:
-	cd kuevassonne/website/static/css && \
+create-styles-dev:
+	cd website/static/css && \
   npx tailwindcss -i styles.css -o dist.css --watch
+
+create-styles-prod:
+	cd website/static/css && \
+  npx tailwindcss -i styles.css -o dist.css
 
