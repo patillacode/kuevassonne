@@ -315,15 +315,28 @@ video {
 
 .border-orange {
     --tw-border-opacity: 1;
-    border-color: rgba(255, 105, 0, var(--tw-border-opacity))
+    border-color: rgba(255, 165, 0, var(--tw-border-opacity))
 }
 .bg-orange {
     --tw-bg-opacity: 1;
-    background-color: rgba(255, 105, 0, var(--tw-bg-opacity))
+    background-color: rgba(255, 165, 0, var(--tw-bg-opacity))
 }
 .text-orange {
     --tw-text-opacity: 1;
-    color: rgba(255, 105, 0, var(--tw-text-opacity))
+    color: rgba(255, 165, 0, var(--tw-text-opacity))
+}
+
+.border-weed {
+    --tw-border-opacity: 1;
+    border-color: rgba(0, 128, 0, var(--tw-border-opacity))
+}
+.bg-weed {
+    --tw-bg-opacity: 1;
+    background-color: rgba(0, 128, 0, var(--tw-bg-opacity))
+}
+.text-weed {
+    --tw-text-opacity: 1;
+    color: rgba(0, 128, 0, var(--tw-text-opacity))
 }
 
 .border-brown {
