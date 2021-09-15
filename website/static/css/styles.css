@@ -23,6 +23,8 @@
     text-align: center;
     border: 1px solid #111;
     transition: transform 0.2s ease;
+    width: 100%;
+    display: inline-block;
   }
   .btn:hover {
     transform: scale(1.025);
@@ -175,7 +177,12 @@ a:hover {
 }
 
 .block {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(20, 20, 20, 0.8);
   border-radius: 50px;
   padding: 5%;
+}
+
+.feedback {
+  border-radius: 50px;
+  padding: 1%;
 }
