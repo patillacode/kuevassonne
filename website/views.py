@@ -81,18 +81,6 @@ def players(request, player_id=None):
         all_players = Player.objects.all()
         all_players_in_game = PlayerInGame.objects.all()
 
-        # win_streak_data = {
-        #     player.name: {'current_win_streak': 0, 'max_win_streak': 0}
-        #     for player in all_players
-        # }
-        # previous_winner = None
-
-        # loss_streak_data = {
-        #     player.name: {'current_loss_streak': 0, 'max_loss_streak': 0}
-        #     for player in all_players
-        # }
-        # previous_loser = None
-
         streak_data = {
             player.name: {
                 'current_win_streak': 0,
