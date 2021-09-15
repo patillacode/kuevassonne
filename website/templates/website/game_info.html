@@ -36,27 +36,25 @@
 
                 <div class="grid grid-cols-2">
                     {% for player_in_game in players_in_game %}
-                        {% with meeple_url='assets/meeple_'|add:player_in_game.color|lower|add:'.png' %}
-                            {% if forloop.counter < 4 %}
-                                <div class="flex items-center my-2 mx-auto {% if forloop.counter is 1 or players_in_game.count == 2 %}col-span-2{% endif %}">
-                                    <div class="flex">
-                                        <img class="mx-auto max-h-10" src="{% static meeple_url %}" alt="">
-                                    </div>
-                                    <div class="text-left mx-auto flex {% if forloop.counter is 1 %}text-2xl{% else %}text-xl{% endif %} text-{% get_color_conversion player_in_game.color %}">
-                                        <span class="inline-block">{{ player_in_game.position }}º</span>
-                                        <span class="inline-block mx-2 {% if forloop.counter is 1 %}font-extrabold{% else %}font-bold{% endif %}">{{ player_in_game.player.name }} ({{ player_in_game.score }})</span>
-                            {% else %}
-                                <div class="flex items-center my-2 mx-auto">
-                                    <div class="flex">
-                                        <img class="mx-auto max-h-6" src="{% static meeple_url %}" alt="">
-                                    </div>
-                                    <div class="text-left mx-auto flex text-md text-{% get_color_conversion player_in_game.color %}">
-                                        <span class="inline-block">{{ player_in_game.position }}º</span>
-                                        <span class="inline-block mx-2">{{ player_in_game.player.name }} ({{ player_in_game.score }})</span>
-                            {% endif %}
-                                    </div>
+                        {% if forloop.counter < 4 %}
+                            <div class="flex items-center my-2 mx-auto {% if forloop.counter is 1 or players_in_game.count == 2 %}col-span-2{% endif %}">
+                                <div class="flex">
+                                    {% include "website/partials/meeple.html" with color=player_in_game.color|lower size=10 %}
                                 </div>
-                        {% endwith %}
+                                <div class="text-left mx-auto flex {% if forloop.counter is 1 %}text-2xl{% else %}text-xl{% endif %} text-{% get_color_conversion player_in_game.color %}">
+                                    <span class="inline-block">{{ player_in_game.position }}º</span>
+                                    <span class="inline-block mx-2 {% if forloop.counter is 1 %}font-extrabold{% else %}font-bold{% endif %}">{{ player_in_game.player.name }} ({{ player_in_game.score }})</span>
+                        {% else %}
+                            <div class="flex items-center my-2 mx-auto">
+                                <div class="flex">
+                                    {% include "website/partials/meeple.html" with color=player_in_game.color|lower size=6 %}
+                                </div>
+                                <div class="text-left mx-auto flex text-md text-{% get_color_conversion player_in_game.color %}">
+                                    <span class="inline-block">{{ player_in_game.position }}º</span>
+                                    <span class="inline-block mx-2">{{ player_in_game.player.name }} ({{ player_in_game.score }})</span>
+                        {% endif %}
+                                </div>
+                            </div>
                     {% endfor %}
                 </div>
             </div>
