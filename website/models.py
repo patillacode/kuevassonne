@@ -191,11 +191,14 @@ class Game(models.Model):
             player.save()
 
         # Average Position
-        for data in players_in_game.values('player').annotate(
-            average=models.Avg('position')
-        ):
-            player = Player.objects.get(pk=data['player'])
-            player.average_position = round(data['average'], 2)
+        for player in Player.objects.all():
+            average = (
+                PlayerInGame.objects.filter(player=player)
+                .values('player__name')
+                .annotate(average=models.Avg('position'))[0]['average']
+            )
+            player.average_position = round(average, 2)
+            player.save()
 
         self.finalised = True
         self.save()
