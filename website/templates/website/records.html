@@ -5,6 +5,35 @@
 {% block title %}Records{% endblock %}
 
 {% block content %}
+{% include "website/partials/hero.html" with title="Logros" %}
+<section class="block">
+
+    <table class="table-auto border-collapse">
+      <thead>
+        <tr>
+            <th class="bg-gold border border-white py-1 px-2">Oros</th>
+            <th class="bg-silver border border-white py-1 px-2">Platas</th>
+            <th class="bg-red border border-white py-1 px-2">Colistas</th>
+            <th class="bg-orange border border-white py-1 px-2">Win Rate</th>
+            <th class="bg-green border border-white py-1 px-2">Posición Media</th>
+            <th class="bg-blue border border-white py-1 px-2">Racha Ganadora</th>
+            <th class="bg-pink border border-white py-1 px-2">Racha Perdedora</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td class="text-center bg-gold py-1 px-2 border border-white">{{achievements.most_golds.player_name}} {{achievements.most_golds.value}}</td>
+            <td class="text-center bg-silver py-1 px-2 border border-white">{{achievements.most_silvers.player_name}} {{achievements.most_silvers.value}}</td>
+            <td class="text-center bg-red py-1 px-2 border border-white">{{achievements.most_losses.player_name}} {{achievements.most_losses.value}}</td>
+            <td class="text-center bg-orange py-1 px-2 border border-white">{{achievements.best_wr.player_name}} {{achievements.best_wr.value}}%</td>
+            <td class="text-center bg-green py-1 px-2 border border-white">{{achievements.best_average.player_name}} {{achievements.best_average.value}}</td>
+            <td class="text-center bg-blue py-1 px-2 border border-white">{{achievements.best_win_streak.player_name}} {{achievements.best_win_streak.value}}</td>
+            <td class="text-center bg-pink py-1 px-2 border border-white">{{achievements.worst_loss_streak.player_name}} {{achievements.worst_loss_streak.value}}</td>
+        </tr>
+      </tbody>
+    </table>
+</section>
+
     {% include "website/partials/hero.html" with title="Records" %}
     {% include 'website/partials/records_box.html' %}
     <div class="w-full max-w-sm mx-auto my-2">

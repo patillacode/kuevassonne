@@ -9,17 +9,17 @@
         <form class="w-full max-w-sm mx-auto" action="{% url 'create_players_in_game' game_id %}" method="post">
             {% csrf_token %}
             
-            <div class="flex p-2">
+            <div class="grid grid-rows-2 p-2">
 
                 <div class="grid grid-cols-2 items-center gap-2">
-                    <p class="text-right">Jugador:</p>
+                    <p class="text-right">Elegir jugador:</p>
                     <p>{{ players_in_game_form.player }}</p>
-                    <p class="text-right">Color:</p>
+                    <p class="text-right">Elegir color:</p>
                     <p>{{ players_in_game_form.color }}</p>
                 </div>
 
                 <div class="mx-2">
-                    <input class="btn w-full h-full" type="submit" name="another_player" value="Añadir">
+                    <input class="btn w-full mt-4" type="submit" name="another_player" value="Añadir">
                 </div>
                 
             </div>
@@ -35,15 +35,15 @@
                 </div>
 
                 {% for player in players_in_game %}
-                    <div class="grid grid-cols-3 text-center items-center w-1/2 mx-auto my-2">
+                    <div class="grid grid-cols-3 items-center my-2">
                         {% include "website/partials/meeple.html" with color=player.color|lower size=8 %}
-                        <p class="text-left">{{ player.player }}</p>
+                        <p class="text-left mr-2">{{ player.player }}</p>
                         <form action="{% url 'create_players_in_game' game_id %}" method="post">
                             {% csrf_token %}
                             <label>
                                 <input class="hidden" type="submit">
                                 <input class="hidden" name="delete_player_in_game_id" value="{{ player.id }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red hover:text-white hover:bg-black rounded-full cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red hover:text-gold cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </label>

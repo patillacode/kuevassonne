@@ -44,6 +44,8 @@
                                 <div class="text-left mx-auto flex {% if forloop.counter is 1 %}text-2xl{% else %}text-xl{% endif %} text-{{ player_in_game.color|lower }}">
                                     <span class="inline-block">{{ player_in_game.position }}º</span>
                                     <span class="inline-block mx-2 {% if forloop.counter is 1 %}font-extrabold{% else %}font-bold{% endif %}">{{ player_in_game.player.name }} ({{ player_in_game.score }})</span>
+                                </div>
+                            </div>
                         {% else %}
                             <div class="flex items-center my-2 mx-auto">
                                 <div class="flex">
@@ -52,9 +54,9 @@
                                 <div class="text-left mx-auto flex text-md text-{{ player_in_game.color|lower }}">
                                     <span class="inline-block">{{ player_in_game.position }}º</span>
                                     <span class="inline-block mx-2">{{ player_in_game.player.name }} ({{ player_in_game.score }})</span>
-                        {% endif %}
                                 </div>
                             </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

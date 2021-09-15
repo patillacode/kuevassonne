@@ -24,8 +24,8 @@
                 <form action="{% url 'in_game' game.id %}" method="post" class="flex flex flex-col" autocomplete="off">
                     {% csrf_token %}
                     <input type="hidden" name="player_id" value="{{player.id}}">
-                    <input class="border-4 border-solid border-{{ player.color|lower }} text-center w-full mx-auto text-2xl text-black" type="text" name="points_to_add" value="" placeholder="0">
-                    <input class="bg-{{ player.color|lower }} border-2 border-solid border-transparent {% if player.color == 'BLACK' %}text-white{% else %}text-black{% endif %} font-bold py-2 px-4 w-full mx-auto transition duration-500 ease-in-out transform hover:translate-y-1 hover:scale-105" type="submit" value="a {{ player.player.name }}">
+                    <input class="border-4 border-solid border-{{ player.color|lower }} text-center w-full mx-auto text-2xl text-black appearance-none focus:outline-none" type="text" name="points_to_add" value="" placeholder="0">
+                    <input class="appearance-none focus:outline-none bg-{{ player.color|lower }} border-2 border-solid border-transparent {% if player.color == 'BLACK' %}text-white{% else %}text-black{% endif %} font-bold py-2 px-4 w-full mx-auto transition duration-500 ease-in-out transform hover:translate-y-1 hover:scale-105" type="submit" value="a {{ player.player.name }}">
                 </form>
             </div>
         {% endfor %}
