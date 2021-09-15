@@ -5,7 +5,7 @@
 {% block title %}En partida{% endblock %}
 
 {% block content %}
-<section class="relative flex flex-col min-w-lg mx-auto my-2">
+<section class="block">
 
     <div class="grid grid-cols-{{players_in_game|length}} z-10 w-full mx-auto p-2">
         {% for player in players_in_game %}
@@ -26,36 +26,24 @@
                 <form action="{% url 'in_game' game.id %}" method="post" class="flex flex flex-col" autocomplete="off">
                     {% csrf_token %}
                     <input type="hidden" name="player_id" value="{{player.id}}">
-                    <input class="border-4 border-solid border-{% get_color_conversion player.color %} text-center w-full mx-auto text-2xl" type="text" name="points_to_add" value="" placeholder="0">
-                    <input class="bg-{% get_color_conversion player.color %} border-2 border-solid border-transparent {% if player.color == 'BLACK' %}text-white{% else %}text-black{% endif %} font-bold py-2 px-4 w-full mx-auto transition duration-500 ease-in-out transform hover:translate-y-1 hover:scale-105" type="submit" value="a {{ player.player.name }}">
+                    <input class="border-4 border-solid border-{{ player.color|lower }} text-center w-full mx-auto text-2xl text-black" type="text" name="points_to_add" value="" placeholder="0">
+                    <input class="bg-{{ player.color|lower }} border-2 border-solid border-transparent {% if player.color == 'BLACK' %}text-white{% else %}text-black{% endif %} font-bold py-2 px-4 w-full mx-auto transition duration-500 ease-in-out transform hover:translate-y-1 hover:scale-105" type="submit" value="a {{ player.player.name }}">
                 </form>
             </div>
         {% endfor %}
     </div>
 
-    <div class="grid grid-cols-{{players_in_game|length}} w-full max-h-80 overflow-y-scroll">
+    <div class="grid grid-cols-{{players_in_game|length}} w-full max-h-40 overflow-y-scroll">
     	{% for player in players_in_game %}
 			<div class="">
     			{% get_points_list player.player.name as point_list %}
     			{% for points in point_list %}
-	    			<div class="text-center text-md border-r-2 border-b-2 border-solid border-black">{{ points }}</div>
+	    			<div class="text-center text-md border-r-2 border-b-2 border-solid border-grey-300">{{ points }}</div>
 	    		{% endfor %}
 			</div>
 		{% endfor %}
     </div>	
 
-    <div class="grid grid-cols-2 w-full max-w-sm mx-auto my-4 py-4 border-b-2 border-solid">
-    	<form class="flex " action="{% url 'in_game' game.id %}" method="post" class="flex" enctype="multipart/form-data">
-    		{% csrf_token %}
-    		<div>
-    			{{ images_form.name }}
-    			{{ images_form.image }}
-    		</div>
-    		<div>
-    			<input class="h-full bg-blue-300 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg mx-auto" type="submit" value="Subir imagen">
-    		</div>
-		</form>
-    </div>
 
     {% if expansions_in_game %}
         {% include 'website/partials/expansions_box.html' %}
@@ -65,10 +53,23 @@
         {% include 'website/partials/images_box.html' %}
     {% endif %}
 
+    <div class="grid grid-cols-2 w-full max-w-sm mx-auto my-8 py-4 ">
+    	<form class="flex " action="{% url 'in_game' game.id %}" method="post" class="flex" enctype="multipart/form-data">
+    		{% csrf_token %}
+    		<div>
+    			{{ images_form.name }}
+    			{{ images_form.image }}
+    		</div>
+    		<div>
+    			<input class="btn" type="submit" value="Subir imagen">
+    		</div>
+		</form>
+    </div>
+
     <div>
     	<form action="{% url 'finalize' game.id %}" method="post" class="flex">
     		{% csrf_token %}
-    		<input class="bg-blue-300 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-full w-full mx-auto" type="submit" value="Finalizar Partida">
+    		<input class="btn" type="submit" value="Finalizar Partida">
 		</form>
     </div>
 </section>

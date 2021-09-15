@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    <section class="my-2">
+    <section class="block">
         <form class="w-full max-w-md mx-auto" action="{% url 'create_expansions_in_game' game_id %}" method="post">
             {% csrf_token %}
             
@@ -19,7 +19,7 @@
                     <p class="">{{ expansions_in_game_form.use_tiles }}</p>
                     <p class="">{{ expansions_in_game_form.use_rules }}</p>
                 </div>
-                <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full max-w-md mx-auto my-4" type="submit" name="another_expansion" value="Añadir">
+                <input class="btn my-4" type="submit" name="another_expansion" value="Añadir">
         </form>
 
         {% if expansions_in_game %}
@@ -28,9 +28,9 @@
             </div>
         {% endif %}
             
+        <a href="{% url 'create_players_in_game' game_id %}" class="btn">Siguiente paso</a>
     </section>
     
-    <a href="{% url 'create_players_in_game' game_id %}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full max-w-md m-auto text-center block">Siguiente paso</a>
     
     {% include 'website/partials/instructions.html' with step=2 %}
 
