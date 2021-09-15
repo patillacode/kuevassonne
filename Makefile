@@ -1,6 +1,6 @@
 reload-from-server: reload-db reload-media
 statics-and-migrations: docker-setup
-install: python-install statics-and-migrations
+install: python-install
 
 python-install:
 	python3 -m venv venv && \

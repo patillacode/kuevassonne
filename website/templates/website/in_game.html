@@ -10,9 +10,7 @@
     <div class="grid grid-cols-{{players_in_game|length}} z-10 w-full mx-auto p-2">
         {% for player in players_in_game %}
             <div class="flex items-center font-bold text-center justify-center">
-            	{% with meeple_url='assets/meeple_'|add:player.color|lower|add:'.png' %}
-            		<img class="max-h-10" src="{% static meeple_url %}" alt="">
-    			{% endwith %}
+                {% include "website/partials/meeple.html" with color=player.color|lower size=10 %}
             	<p class="flex items-center ml-2">
             		<span class="text-xl mr-2">{{ player.player.name }}</span>
             		<span class="text-2xl">{% get_total_points player.player.name %}</span></p>

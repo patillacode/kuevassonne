@@ -52,12 +52,12 @@
             </p>
             <a class="grid grid-cols-6 col-span-6" href="{% url 'game_info' game.id %}">
             {% for player in game.game_players %}
-                {% with meeple_url='assets/meeple_'|add:player.color|lower|add:'.png' %}
-                    <p class="text-{% get_color_conversion player.color %} font-bold flex items-center text-center mx-auto border-solid border-l-2 border-white w-full">
-                        <img class="ml-2 mr-1 max-h-4" src="{% static meeple_url %}" alt="">
-                        {{ player.player.name }} <span class="text-sm italic ml-1">({{ player.score }})</span>
-                    </p>
-                {% endwith %}
+                <p class="text-{{ player.color|lower }} font-bold flex items-center text-center mx-auto border-solid border-l-2 border-black w-full">
+                    <span class="ml-2 mr-1">
+                        {% include "website/partials/meeple.html" with color=player.color|lower size=4 %}
+                    </span>
+                    {{ player.player.name }} <span class="text-sm italic ml-1">({{ player.score }})</span>
+                </p>
             {% endfor %}
             </a>
         </div>

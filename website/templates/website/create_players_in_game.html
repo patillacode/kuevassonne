@@ -36,20 +36,18 @@
 
                 {% for player in players_in_game %}
                     <div class="grid grid-cols-3 text-center items-center w-1/2 mx-auto my-2">
-                        {% with meeple_url='assets/meeple_'|add:player.color|lower|add:'.png' %}
-                            <p class="text-right"><img class="max-h-8" src="{% static meeple_url %}" alt=""></p>
-                            <p class="text-left">{{ player.player }}</p>
-                            <form action="{% url 'create_players_in_game' game_id %}" method="post">
-                                {% csrf_token %}
-                                <label>
-                                    <input class="hidden" type="submit">
-                                    <input class="hidden" name="delete_player_in_game_id" value="{{ player.id }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red hover:text-white hover:bg-black rounded-full cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </label>
-                            </form>
-                        {% endwith %}
+                        {% include "website/partials/meeple.html" with color=player.color|lower size=8 %}
+                        <p class="text-left">{{ player.player }}</p>
+                        <form action="{% url 'create_players_in_game' game_id %}" method="post">
+                            {% csrf_token %}
+                            <label>
+                                <input class="hidden" type="submit">
+                                <input class="hidden" name="delete_player_in_game_id" value="{{ player.id }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red hover:text-white hover:bg-black rounded-full cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </label>
+                        </form>
                     </div>
                 {% endfor %}
             </div>

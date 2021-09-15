@@ -44,6 +44,9 @@ cd kuevassonne
 
 # run the install command
 make install
+
+# and then after you know your DB is in order
+make statics-and-migrations
 ```
 
 Or if you prefer to do things step by step, knowingly:

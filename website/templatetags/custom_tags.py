@@ -11,7 +11,7 @@ COLOR_CONVERSION = {
     'blue': 'blue-500',
     'yellow': 'yellow',
     'pink': 'pink-500',
-    'green': 'lime-600',
+    'green': 'weed',
     'black': 'black',
     'orange': 'orange',
     'white': 'white',
