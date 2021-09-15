@@ -25,6 +25,8 @@
     transition: transform 0.2s ease;
     width: 100%;
     display: inline-block;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
   }
   .btn:hover {
     transform: scale(1.025);
