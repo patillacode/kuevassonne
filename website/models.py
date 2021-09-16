@@ -79,15 +79,12 @@ class Game(models.Model):
     duration = models.CharField(max_length=9, blank=True, null=True)
 
     total_time = models.IntegerField(
-        help_text='Number of seconds the game lasted for.', blank=True, null=True
+        help_text='Number of seconds the game lasted for', blank=True, null=True
     )
     avg_seconds_per_turn = models.IntegerField(
-        help_text='Number of seconds of the average turn.', blank=True, null=True
+        help_text='Number of seconds of the average turn', blank=True, null=True
     )
     total_number_of_tiles = models.IntegerField(blank=True, null=True)
-
-    image = models.ImageField(blank=True)
-
     finalised = models.BooleanField(default=False)
     draw = models.BooleanField(default=False)
 
@@ -246,12 +243,12 @@ class Image(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game_images')
 
-    @property
-    def description(self):
-        return self.name or self.image.name
-
     def __str__(self):
         return self.name or self.image.name
+
+    @property
+    def description(self):
+        return self.__str__()
 
 
 class Record(models.Model):
@@ -259,3 +256,6 @@ class Record(models.Model):
     image = models.ImageField(default=None)
     description = models.TextField()
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game_records')
+
+    class Meta:
+        ordering = ['-id']
