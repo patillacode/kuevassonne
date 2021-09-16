@@ -6,6 +6,7 @@
 {% block content %}
 
     <section class="block">
+        {% include "website/partials/hero.html" with title="Añadir Expansiones" %}
         <form class="w-full max-w-md mx-auto" action="{% url 'create_expansions_in_game' game_id %}" method="post">
             {% csrf_token %}
             
@@ -24,14 +25,10 @@
 
         {% if expansions_in_game %}
             <div class="w-full max-w-2xl mx-auto">
+                {% include "website/partials/hero.html" with title="Expansiones" %}
                 {% include 'website/partials/expansions_box.html' with can_remove_expansion=1 %}
             </div>
         {% endif %}
-            
         <a href="{% url 'create_players_in_game' game_id %}" class="btn">Siguiente paso</a>
     </section>
-    
-    
-    {% include 'website/partials/instructions.html' with step=2 %}
-
 {% endblock %}

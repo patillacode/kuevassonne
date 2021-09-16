@@ -2,11 +2,11 @@
     <div class="flex text-left col-span-2">
         <p class="mr-2">
             {% if expansion.expansion.is_mini is True %}
-            ∆
+                <span class="text-silver">∆
             {% else %}
-            Ω
+                <span class="text-gold">Ω
             {% endif %}
-            {{ expansion.expansion.name }}
+            {{ expansion.expansion.name }}</span>
         </p>
     </div>
     <p class="inline-block mx-auto flex text-center">

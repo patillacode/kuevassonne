@@ -8,8 +8,11 @@
 {% block title %}Jugadores{% endblock %}
 
 {% block content %}
-{% include "website/partials/hero.html" with title="Jugadores" %}
 <section class="block flex flex-col w-full mx-auto">
+    {% include "website/partials/hero.html" with title="Jugadores" big="big"%}
+
+    {% include "website/partials/achievements.html" %}
+
     <div class="grid grid-cols-2 gap-4 w-full p-4 m-2">
         {% for player in players_global %}
             <div class="grid grid-rows-3 border-2 border-solid border-black p-4 bg-opacity-70 bg-gray-200">

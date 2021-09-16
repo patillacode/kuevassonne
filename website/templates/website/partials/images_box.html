@@ -1,17 +1,11 @@
 <div class="w-full my-2 mx-auto p-4 flex flex-col">
-    <div class="flex items-center mx-auto mb-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        <p class="text-center font-bold inline-block">Imágenes</p>
-    </div>
     <div class="grid gap-2 {% if game_images.count > 2 %}grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4{% elif game_images.count == 2%}grid-cols-2{% else %}grid-cols-1{% endif %}">
         {% for image in game_images %}
             <div class="mx-auto">
+                <p class="italic text-gold text-2xl text-center font-bold my-1">{{ image.description }}</p>
                 <a class="" href="{{ image.image.url }}" target="_blank">
                     <img class="max-h-80" src="{{ image.image.url }}" alt="">
                 </a>
-                <p class="text-center">{{ image.description }}</p>
             </div>
         {% endfor %}
     </div>

@@ -1,23 +1,16 @@
 <div class="w-full my-2 mx-auto p-4 flex flex-col">
-    <div class="items-center mx-auto my-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-        </svg>
-        <p class="text-center font-bold inline-block">Expansiones</p>
-    </div>
-
-    <div class="w-full grid grid-cols-{% if can_remove_expansion %}5{% else %}4{% endif %} text-center">
-        <p class="font-bold italic col-span-2 text-left">Nombre</p>
-        <p class="font-bold italic">Losetas ({{ total_number_of_tiles }})</p>
-        <p class="font-bold italic">Reglas</p>
+    <div class="w-full grid grid-cols-{% if can_remove_expansion %}5{% else %}4{% endif %} text-center text-white">
+        <p class="font-bold col-span-2 text-left">Nombre</p>
+        <p class="font-bold">Losetas ({{ total_number_of_tiles }})</p>
+        <p class="font-bold">Reglas</p>
     </div>
     {% for expansion in expansions_in_game %}
         {% include 'website/partials/expansion.html' with can_remove_expansion=can_remove_expansion %}
     {% endfor %}
 
     <div class="flex justify-center gap-2 italic text-sm mt-4">
-        <p>*Ω = expansiones</p>
-        <p>*∆ = miniexpansiones</p>
+        <p class="text-gold">*Ω = expansiones</p>
+        <p class="text-silver">*∆ = miniexpansiones</p>
     </div>
 
 </div>

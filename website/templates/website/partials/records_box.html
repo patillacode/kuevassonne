@@ -1,7 +1,10 @@
-<div class="block">
-    <div class="grid gap-2 {% if records.count > 1 %}grid-cols-2{% else %}grid-cols-1{% endif %}">
-        {% for record in records %}
-            {% include 'website/partials/record.html' with record=record %}
-        {% endfor %}
-    </div>
+<div class="grid gap-2 {% if records.count > 1 %}xl:grid-cols-2 grid-cols-1{% else %}grid-cols-1{% endif %} mt-4">
+    {% for record in records %}
+        {% include 'website/partials/record.html' with record=record show_game=show_game%}
+    {% endfor %}
+    {% if show_game %}
+        <div class="w-full max-w-sm mx-auto my-2 col-span-2">
+            <a href="{% url 'add_record'%}" class="btn">Añadir Récord</a>
+        </div>
+    {% endif %}
 </div>

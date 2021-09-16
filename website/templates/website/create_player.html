@@ -4,9 +4,8 @@
 
 {% block content %}
 
-{% include "website/partials/hero.html" with title="New Game" %}
-
 <section class="block">
+    {% include "website/partials/hero.html" with title="Añadir Jugador" %}
     <form class="w-full max-w-sm mx-auto" action="{% url 'create_player'%}" method="post" autocomplete="off">
         {% csrf_token %}
 
@@ -15,7 +14,6 @@
             <input class="btn" type="submit" value="Crear jugador">
         </div>
     </form>
-    {% include 'website/partials/instructions.html' with step=1 %} 
     <a href="{% url 'create_game'%}" class="btn">Siguiente paso</a>
 
 </section>

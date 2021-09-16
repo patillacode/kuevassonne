@@ -31,7 +31,7 @@
         {% endfor %}
     </div>
 
-    <div class="grid grid-cols-{{players_in_game|length}} w-full max-h-40 overflow-y-scroll">
+    <div class="grid grid-cols-{{players_in_game|length}} mb-8 w-full max-h-40 overflow-y-scroll">
     	{% for player in players_in_game %}
 			<div class="">
     			{% get_points_list player.player.name as point_list %}
@@ -44,24 +44,35 @@
 
 
     {% if expansions_in_game %}
-        {% include 'website/partials/expansions_box.html' %}
+        <div class="mb-8">
+            {% include "website/partials/hero.html" with title="Expansiones" %}
+            {% include 'website/partials/expansions_box.html' %}
+        </div>
     {% endif %}
 
     {% if game_images %}
-        {% include 'website/partials/images_box.html' %}
+        <div class="mb-8">
+            {% include "website/partials/hero.html" with title="Imágenes" %}
+            {% include 'website/partials/images_box.html' %}
+        </div>
     {% endif %}
 
-    <div class="grid grid-cols-2 w-full max-w-sm mx-auto my-8 py-4 ">
-    	<form class="flex " action="{% url 'in_game' game.id %}" method="post" class="flex" enctype="multipart/form-data">
-    		{% csrf_token %}
-    		<div>
-    			{{ images_form.name }}
-    			{{ images_form.image }}
-    		</div>
-    		<div>
-    			<input class="btn" type="submit" value="Subir imagen">
-    		</div>
-		</form>
+    <div class="mb-8">
+        {% include "website/partials/hero.html" with title="Añadir Imagen" %}
+        <div class="flex w-full max-w-sm mx-auto my-2 py-4 ">
+            <form class="" action="{% url 'in_game' game.id %}" method="post" class="flex" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="grid grid-cols-3">
+                    <div class="col-span-2">
+                        {{ images_form.name }}
+                        {{ images_form.image }}
+                    </div>
+                    <div>
+                        <input class="btn" type="submit" value="Subir imagen">
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div>
