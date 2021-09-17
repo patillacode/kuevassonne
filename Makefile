@@ -9,6 +9,7 @@ python-install:
 	pip install -r requirements.txt
 
 docker-setup:
+	. venv/bin/activate && \
 	python manage.py collectstatic --no-input && \
 	python manage.py migrate
 
@@ -64,3 +65,12 @@ reset-db:
 	python manage.py createsuperuser --noinput && \
 	python manage.py makemigrations website && \
 	python manage.py migrate
+
+create-styles-dev:
+	cd website/static/css && \
+	npx tailwindcss -i styles.css -o dist.css --watch
+
+create-styles-prod:
+	cd website/static/css && \
+ 	npx tailwindcss -i styles.css -o dist.css
+

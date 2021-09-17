@@ -133,4 +133,5 @@ dmypy.json
 .DS_Store
 media/*
 static/*
+static
 database_backup.sql

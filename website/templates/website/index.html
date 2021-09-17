@@ -4,49 +4,40 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-<section class="flex flex-col w-full mx-auto my-auto font-sans">
-    <div class="my-2 p-2">
-        <h3 class="text-center mx-auto text-2xl py-2 font-bold">Bienvenido a Kuevassone</h3>
-        <p class="text-center text-xl">Nuestra pequeña <span class="italic">Kueva</span> digital para nuestras partidas de <a class="font-bold text-green-500 underline" href="https://es.wikipedia.org/wiki/Carcassonne_(juego)" target="_blank" title="">Carcassonne</a> </p>
-    </div>
-    <div class="my-2 p-4">
-        <p class="text-center font-bold text-xl">Secciones</p>
-        <div class="my-2">  
-            <p><a class="font-bold underline hover:text-green-500" href="{% url 'create_player' %}">Crear Partida:</a> Aquí es dónde iniciaremos el proceso ante una nueva partida, pudiendo:</p>
-            <div class="flex flex-col">
-                <p class="italic ml-6">Crear perfiles de jugadores que no existan ya.</p>
-                <p class="italic ml-6">Crear una partida con la fecha y la hora de comienzo.</p>
-                <p class="italic ml-6">Asignar expansiones a la nueva partida.</p>
-                <p class="italic ml-6">Asignar jugadores a la nueva partida.</p>
+
+<section class="grid grid-cols-6 flex flex-col w-full mx-auto my-auto font-sans">
+    <div class="col-span-5">
+        <div class="block">
+            {% include "website/partials/hero.html" with title="Bienvenidos a Kuevassone" big="big" %}
+            <p class="text-center text-xl my-8">Nuestra pequeña <span class="italic">Kueva</span> digital para nuestras partidas de <a class="font-bold text-gold hover:text-orange underline" href="https://es.wikipedia.org/wiki/Carcassonne_(juego)" target="_blank" title="">Carcassonne</a></p>
+            <div class="flex justify-center gap-8">
+                <div>
+                    <p class="my-1 text-left"><a target="_blank" class="underline text-gold hover:text-orange" href="https://wikicarpedia.com/index.php/Main_Page/es" title="">WikiCarpedia</a> (Instrucciones)</p>
+                    <p class="my-1 text-left"><a target="_blank" class="underline text-gold hover:text-orange" href="https://carcassonneblog.wordpress.com/2015/04/01/las-reglas-en-espanol-de-todas-las-expansiones-de-carcassonne/" title="">Wordpress</a> (Instrucciones)</p>
+                    <p class="my-1 text-left"><a target="_blank" class="underline text-gold hover:text-orange" href="https://www.carcassonnecentral.com/community/" title="">Carcassonne Central</a> (Foros/Comunidad)</p>
+                    <p class="my-1 text-left"><a target="_blank" class="underline text-gold hover:text-orange" href="https://www.hans-im-glueck.de/_Resources/Persistent/5e28ae929b2a02bb8feccd2e2315c98f2ed58d9b/CarcBasis_SoloRegel_9_E.pdf" title="">Solo variant</a> (Instrucciones <span class="italic">Forever alone</span>)</p>
+                </div>
+                <div>
+                    <p class="my-1 text-left"><a target="_blank" class="underline text-gold hover:text-orange" href="https://www.hans-im-glueck.de/en/games/carcassonne-en.html" title="">Hans Im Glück</a> (Creador)</p>
+                    <p class="my-1 text-left"><a target="_blank" class="underline text-gold hover:text-orange" href="https://cundco.de/en/" title="">Cundco</a> (tienda)</p>
+                    <p class="my-1 text-left"><a target="_blank" class="underline text-gold hover:text-orange" href="https://www.meeplesource.com/" title="">MeepleSource</a> (tienda)</p>
+                    <p class="my-1 text-left"><a target="_blank" class="underline text-gold hover:text-orange" href="https://www.youtube.com/watch?v=T_W12cnsXZw&list=PLOr27fEnfYc7oP7HtmfonfnXui4l7z2cc" title="">Playlist</a> (música de fondo)</p>
+                </div>
             </div>
         </div>
-        <div class="my-2">
-            <p><a class="font-bold underline hover:text-green-500" href="{% url 'games' %}">Partidas:</a> Un histórico de todas las partidas jugadas dónde poder ver los jugadores de esa partida, los puntos de cada jugador en la misma y desde dónde podemos entrar a un análisis más detallado de cada una.</p>
-        </div>
-        <div class="my-2">
-            <p><a class="font-bold underline hover:text-green-500" href="{% url 'players' %}">Jugadores:</a> Dónde se pueden ver algunas estadísticas de cada jugador, como porcentaje de victorias o sus posiciones en partidas, por ejemplo.</p>
-        </div>
-        <div class="my-2">
-            <p><a class="font-bold underline hover:text-green-500" href="{% url 'records' %}">Records:</a> Una sección donde apuntaremos los caminos más largos, las ciudades de más puntos y otros datos <span class="italic">de récord</span>.</p>
-        </div>
-        <div class="my-2">
-            <p><a class="font-bold underline hover:text-green-500" href="{% url 'admin:index' %}">Admin:</a> Únicamente para acceder a la base de datos y corregir algún error/fallo del sistema.</p>
-        </div>
     </div>
-    <div class="grid grid-cols-2 justify-start my-2 p-4">
-        <p class="text-left italic underline col-span-2">Links de interés</p>
-        <div>
-            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://wikicarpedia.com/index.php/Main_Page/es" title="">WikiCarpedia</a> (Instrucciones)</p>
-            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://carcassonneblog.wordpress.com/2015/04/01/las-reglas-en-espanol-de-todas-las-expansiones-de-carcassonne/" title="">Wordpress</a> (Instrucciones)</p>
-            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.carcassonnecentral.com/community/" title="">Carcassonne Central</a> (Foros/Comunidad)</p>
-            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.hans-im-glueck.de/_Resources/Persistent/5e28ae929b2a02bb8feccd2e2315c98f2ed58d9b/CarcBasis_SoloRegel_9_E.pdf" title="">Solo variant</a> (Instrucciones <span class="italic">Forever alone</span>)</p>
-        </div>
-        <div>
-            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.hans-im-glueck.de/en/games/carcassonne-en.html" title="">Hans Im Glück</a> (Creador)</p>
-            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://cundco.de/en/" title="">Cundco</a> (tienda)</p>
-            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.meeplesource.com/" title="">MeepleSource</a> (tienda)</p>
-            <p class="my-1 text-left"><a target="_blank" class="underline text-red-500" href="https://www.youtube.com/watch?v=T_W12cnsXZw&list=PLOr27fEnfYc7oP7HtmfonfnXui4l7z2cc" title="">Playlist</a> (música de fondo)</p>
+    <div>
+        <div class="candle">
+            <div class="flame">
+                <div class="shadows"></div>
+                <div class="top"></div>
+                <div class="middle"></div>
+                <div class="bottom"></div>
+            </div>
+            <div class="wick"></div>
+            <div class="wax"></div>
         </div>
     </div>
 </section>
+
 {% endblock %}

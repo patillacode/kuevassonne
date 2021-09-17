@@ -8,95 +8,27 @@
 {% block title %}Jugadores{% endblock %}
 
 {% block content %}
-<section class="flex flex-col w-full mx-auto my-8">
-    <div class="flex justify-center items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
-        </svg>
-        <p class="text-center font-bold text-2xl mx-2 my-4">Logros</p>
-    </div>
+<section class="block flex flex-col w-full mx-auto">
+    {% include "website/partials/hero.html" with title="Jugadores" big="big"%}
 
-    <div class="grid grid-cols-3 gap-8 justify-center my-4">
-        <div class="flex flex-col gap-1 items-center">
-            <p class="text-center font-bold italic">Oros</p>
-            <p class="flex p-2 bg-yellow-400 uppercase text-white items-center text-xs">
-                <span class="mx-2 text-left font-bold">{{achievements.most_golds.player_name}}</span>
-                <span class="mx-2 text-right font-bold">{{achievements.most_golds.value}}</span>
-            </p>
-        </div>
-        <div class="flex flex-col gap-1 items-center">
-            <p class="text-center font-bold italic">Platas</p>
-            <p class="flex p-2 bg-gray-400 uppercase text-white items-center text-xs">
-                <span class="mx-2 text-left font-bold">{{achievements.most_silvers.player_name}}</span>
-                <span class="mx-2 text-right font-bold">{{achievements.most_silvers.value}}</span>
-            </p>
-        </div>
-        <div class="flex flex-col gap-1 items-center">
-            <p class="text-center font-bold italic">Colistas</p>
-            <p class="flex p-2 bg-red-600 uppercase text-white items-center text-xs">
-                <span class="mx-2 text-left font-bold">{{achievements.most_losses.player_name}}</span>
-                <span class="mx-2 text-right font-bold">{{achievements.most_losses.value}}</span>
-            </p>
-        </div>
-    </div>
-    <div class="grid grid-cols-2 gap-8 justify-center my-4">
-        <div class="flex flex-col gap-1 items-center">
-            <p class="text-center font-bold italic">Win Rate</p>
-            <p class="grid grid-cols-2 w-full p-2 bg-orange uppercase text-white items-center text-xs">
-                <span class="mx-2 text-left font-bold">{{achievements.best_wr.player_name}}</span>
-                <span class="mx-2 text-right font-bold italic">{{achievements.best_wr.value}}%</span>
-                <span class="text-center text-xs col-span-2 lowercase">( en {{achievements.best_wr.number_of_games}} partidas)</span>
-            </p>
-        </div>
-        <div class="flex flex-col gap-1 items-center">
-            <p class="text-center font-bold italic">Posición Media</p>
-            <p class="flex p-2 bg-lime-600 uppercase text-white items-center text-xs">
-                <span class="mx-2 text-left font-bold">{{achievements.best_average.player_name}}</span>
-                <span class="mx-2 text-right font-bold">{{achievements.best_average.value}}</span>
-            </p>
-        </div>
-    </div>
-    <div class="grid grid-cols-2 gap-8 justify-center my-4">
-        <div class="flex flex-col gap-1 items-center">
-            <p class="text-center font-bold italic">Racha Ganadora</p>
-            <p class="grid grid-cols-2 w-full p-2 bg-blue-500 uppercase text-white items-center text-xs">
-                <span class="mx-2 text-left font-bold">{{achievements.best_win_streak.player_name}}</span>
-                <span class="mx-2 text-right font-bold italic">{{achievements.best_win_streak.value}}</span>
-            </p>
-        </div>
-        <div class="flex flex-col gap-1 items-center">
-            <p class="text-center font-bold italic">Racha Perdedora</p>
-            <p class="grid grid-cols-2 w-full p-2 bg-pink-500 uppercase text-white items-center text-xs">
-                <span class="mx-2 text-left font-bold">{{achievements.worst_loss_streak.player_name}}</span>
-                <span class="mx-2 text-right font-bold italic">{{achievements.worst_loss_streak.value}}</span>
-            </p>
-        </div>
-    </div>
-</section>
+    {% include "website/partials/achievements.html" %}
 
-<section class="flex flex-col w-full mx-auto">
-    <div class="flex justify-center items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-        <p class="text-center font-bold text-2xl mx-2 my-2">Jugadores</p>
-    </div>
     <div class="grid grid-cols-2 gap-4 w-full p-4 m-2">
         {% for player in players_global %}
             <div class="grid grid-rows-3 border-2 border-solid border-black p-4 bg-opacity-70 bg-gray-200">
                 <div class="grid grid-cols-2 gap-4 col-span-2 items-center">
-                    {% get_color_conversion player.favourite_color as favourite_color %}
-
-                    <div class="flex flex-col gap-4 items-center font-bold text-xl text-{{ favourite_color }}">
-                        <p class="flex items-center justify-between">{% include "website/partials/meeple.html" with color=player.favourite_color|lower size=8 %}<span class="ml-2">{{ player.name }}</span></p>
-                    </div>
-                    <div>
-                        <p>Jugadas: <span class="font-bold text-{{ favourite_color }}">{{ player.games_played }}</span></p>
-                        <p>Ganadas: <span class="font-bold text-{{ favourite_color }}">{{ player.wins }}</span></p>
-                        <p>Farolillos: <span class="font-bold text-{{ favourite_color }}">{{ player.losses }}</span></p>
-                        <p>Posición Media: <span class="font-bold text-{{ favourite_color }}">{{ player.average_position }}</span></p>
-                        <p>WR: <span class="font-bold text-{{ favourite_color }}">{{ player.win_rate }} %</span></p>
-                    </div>
+                    {% with player.favourite_color|lower as favourite_color %}
+                        <div class="flex flex-col gap-4 items-center font-bold text-xl text-{{ favourite_color }}">
+                            <p class="flex items-center justify-between">{% include "website/partials/meeple.html" with color=favourite_color size=8 %}<span class="ml-2">{{ player.name }}</span></p>
+                        </div>
+                        <div>
+                            <p>Jugadas: <span class="font-bold text-{{ favourite_color }}">{{ player.games_played }}</span></p>
+                            <p>Ganadas: <span class="font-bold text-{{ favourite_color }}">{{ player.wins }}</span></p>
+                            <p>Farolillos: <span class="font-bold text-{{ favourite_color }}">{{ player.losses }}</span></p>
+                            <p>Posición Media: <span class="font-bold text-{{ favourite_color }}">{{ player.average_position }}</span></p>
+                            <p>WR: <span class="font-bold text-{{ favourite_color }}">{{ player.win_rate }} %</span></p>
+                        </div>
+                    {% endwith %}
                 </div>
                 <div class="bars-chart-container col-span-2 row-span-2">
                     <canvas id="bar-chart-{{player.id}}"></canvas>

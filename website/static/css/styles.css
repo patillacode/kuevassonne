@@ -1,0 +1,371 @@
+/* website/static/css/styles.css */
+@tailwind base;
+@tailwind components;
+
+@layer base {
+  @font-face {
+    font-family: 'Beaufort';
+    src: url('/static/fonts/Beaufort-Bold.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Spiegel';
+    src: url('/static/fonts/Spiegel-Regular.woff') format('woff');
+  }
+}
+
+@tailwind utilities;
+
+/* Tailwind components */
+@layer components {
+  .btn {
+    @apply px-4 py-3 bg-gold;
+    text-align: center;
+    border: 1px solid #111;
+    transition: transform 0.2s ease;
+    width: 100%;
+    display: inline-block;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  .btn:hover {
+    transform: scale(1.025);
+  }
+  .block {
+    /*background: rgba(66, 66, 66, 0.8);*/
+    @apply bg-gradient-to-b from-dark to-black;
+    border-radius: 50px;
+    padding: 3%;
+  }
+}
+
+body {
+  background: url('/static/assets/backgrounds/main.jpg') no-repeat fixed center /
+    cover;
+  color: #f9f9f9;
+  min-height: 100vh;
+  cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/836/hearthstone-cursor.png)
+      10 2,
+    auto;
+  display: grid;
+}
+
+@media only screen and (max-width: 999px) {
+  body {
+    overflow-y: hidden;
+    grid-template-rows: 1fr 60px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  body {
+    overscroll-y: scroll;
+    grid-template-columns: 80px 1fr;
+  }
+}
+
+a:hover {
+  cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/836/hearthstone-click.png)
+      10 2,
+    auto;
+}
+
+.header {
+  position: sticky;
+  padding: 10px;
+  display: grid;
+  justify-items: center;
+}
+
+@media only screen and (max-width: 999px) {
+  .header {
+    height: 100%;
+    background: #111;
+    width: 100%;
+    bottom: 0;
+    grid-row: 2;
+    grid-template-columns: auto 1fr auto;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .header {
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.33);
+    top: 0;
+    grid-template-rows: auto 1fr auto;
+  }
+}
+
+.header__logo {
+  align-self: center;
+  padding: 10px;
+  width: 100%;
+}
+
+@media only screen and (max-width: 999px) {
+  .header__logo {
+    width: 50px;
+  }
+}
+
+.header__nav {
+  align-self: center;
+  display: grid;
+  row-gap: 20px;
+  border-radius: 50px;
+  background: #111;
+  padding: 10px;
+}
+
+@media only screen and (max-width: 999px) {
+  .header__nav {
+    display: inline-grid;
+    grid-gap: 10px;
+    grid-auto-flow: column;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .header__nav {
+    width: 100%;
+  }
+}
+
+.header__nav a {
+  width: 100%;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background: #1a191a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;
+}
+
+.header__nav a svg {
+  width: 32px;
+}
+
+/* Hero */
+.hero {
+  /*margin-bottom: 3vh;*/
+}
+.hero h1 {
+  -webkit-text-stroke: 2px #111;
+  line-height: 1em;
+  width: 100%;
+  font-size: clamp(10px, 16.4px + 4.88vw, 40px);;
+}
+.hero h1.big {
+  font-size: clamp(32px, 16.4px + 4.88vw, 110px);
+}
+
+/* Main */
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 999px) {
+  .main {
+    grid-row: 1;
+    overflow-y: scroll;
+    padding: 20px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .main {
+    padding: 50px;
+  }
+}
+
+.games-cell {
+  /*background-color: #999999;*/
+  padding: 0.25rem 0.5rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgba(255, 255, 255, var(--tw-border-opacity));
+}
+.games-header-cell {
+  background-color: #999999;
+  color: black;
+}
+
+.games-header-cell:hover {
+  background-color: #a88a50;
+}
+
+.empty-cell {
+  background-color: #999999;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='1' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.feedback {
+  border-radius: 50px;
+  padding: 1%;
+}
+
+
+/*Candle stuff*/
+.candle {
+  width: 34px;
+  margin: 30px auto 0 auto;
+  position: relative;
+  height: 80%;
+  align-self: flex-end;
+  -webkit-animation: blink 0.1s infinite;
+          animation: blink 0.1s infinite;
+}
+
+.wick {
+  position: absolute;
+  width: 6px;
+  height: 50px;
+  background: #23161a;
+  top: 110px;
+  left: 50%;
+  transform: translateX(-50%) skewX(2deg);
+  border-radius: 10%;
+  box-shadow: 0 0 2px 0px black;
+}
+.wick:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  left: 50%;
+  height: 10px;
+  box-shadow: 0 -14px 10px 8px white, 0 -10px 10px 8px rgba(255, 215, 0, 0.7), 0 -3px 10px 8px rgba(255, 106, 0, 0.7), 0 6px 3px 4px black;
+}
+.wick:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0px;
+  height: 0px;
+  box-shadow: 0 5px 2px 3px gold, 0 20px 2px 14px gold, 0 -6px 4px 5px rgba(98, 33, 27, 0.8), 0 0px 1px 4px rgba(255, 106, 0, 0.7), 0 0px 3px 4px #ff6a00, 0 5px 3px 4px gold;
+}
+
+.flame {
+  width: 20px;
+  height: 150px;
+  margin: 0px auto;
+  position: relative;
+  -webkit-animation: move 3s infinite, move-left 3s infinite;
+          animation: move 3s infinite, move-left 3s infinite;
+  transform-origin: 50% 90%;
+}
+.flame .top {
+  width: 20px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+  border-top-left-radius: 500%;
+  border-bottom-left-radius: 50px;
+  border-top-right-radius: 500%;
+  border-bottom-right-radius: 50px;
+  transform: skewY(-10deg);
+  box-shadow: 0 0px 0px 3px white, 0 -20px 1px 4px white, 0 -25px 2px 3px gold, 0 -30px 5px 4px #ff6a00, 0 0px 150px 10px #ff6a00, 0 -10px 2px 4px white, 0 -5px 3px 3px white;
+  -webkit-animation: flame-up 4s infinite;
+          animation: flame-up 4s infinite;
+}
+.flame .shadows {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 5px 20px 15px gold, 0 0px 100px 20px #ff6a00, 0 15px 50px 15px #ff6a00, 5px 30px 5px 13px #ff6a00, 5px 50px 5px 13px #ff6a00, 0 75px 50px 30px black;
+}
+.flame .bottom {
+  transform: scale(0.9);
+  position: absolute;
+  bottom: 6px;
+  left: 9px;
+  width: 1px;
+  height: 8px;
+  border-radius: 1%;
+  background: #2c2b39;
+  box-shadow: 0 6px 10px 12px rgba(60, 76, 125, 0.3), 0 0px 4px 8px #2c2b39, 0 -12px 10px 8px rgba(255, 106, 0, 0.5), 0 5px 7px 12px #2c2b39, 0 -3px 10px 12px #2c2b39, 5px -10px 10px 5px red, 0 -15px 10px 10px gold, 5px -25px 10px 5px gold, 0 2px 5px 10px #30537d, 0 -2px 2px 14px #76daff, 0 2px 10px 12px #76daff;
+}
+
+.wax {
+  position: relative;
+  top: 15px;
+  width: 100%;
+  height: inherit;
+  background: #ff9224;
+  /* FF3.6-15 */
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #ff9224 0px, #ff9224 20px, #58523a 50px);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#ff9224", endColorstr="#58523a",GradientType=0 );
+  /* IE6-9 */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: inset 0 7px 12px -2px #fbf348, inset 0 9px 57px -3px rgba(255, 0, 0, 0.4), inset 0 -5px 8px 2px black, 0 0 3px 0px #ff6a00;
+}
+
+@-webkit-keyframes move {
+  0% {
+    transform: skewX(2deg) skewY(5deg);
+  }
+  50% {
+    transform: skewX(-2deg) skewY(0deg);
+  }
+  100% {
+    transform: skewX(2deg) skewY(5deg);
+  }
+}
+
+@keyframes move {
+  0% {
+    transform: skewX(2deg) skewY(5deg);
+  }
+  50% {
+    transform: skewX(-2deg) skewY(0deg);
+  }
+  100% {
+    transform: skewX(2deg) skewY(5deg);
+  }
+}
+@-webkit-keyframes move-left {
+  50% {
+    transform: skewX(3deg);
+  }
+}
+@keyframes move-left {
+  50% {
+    transform: skewX(3deg);
+  }
+}
+@-webkit-keyframes flame-up {
+  50% {
+    box-shadow: 0 0px 0px 3px white, 0 -38px 1px 2px white, 0 -41px 2px 3px gold, 0 -50px 5px 4px #ff6a00, 0 0px 150px 10px #ff6a00, 0 -10px 2px 4px white, 0 -5px 3px 3px white;
+  }
+}
+@keyframes flame-up {
+  50% {
+    box-shadow: 0 0px 0px 3px white, 0 -38px 1px 2px white, 0 -41px 2px 3px gold, 0 -50px 5px 4px #ff6a00, 0 0px 150px 10px #ff6a00, 0 -10px 2px 4px white, 0 -5px 3px 3px white;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    opacity: 0.95;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0.95;
+  }
+}

@@ -11,9 +11,7 @@ class CreatePlayerForm(forms.ModelForm):
             'name': forms.TextInput(
                 attrs={
                     'class': (
-                        'appearance-none border-black border-b-2 border-solid w-full'
-                        ' text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none'
-                        ' bg-transparent'
+                        'appearance-none focus:outline-none text-white bg-transparent'
                     ),
                     'placeholder': 'Nombre del jugador',
                 }

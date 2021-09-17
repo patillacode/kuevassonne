@@ -1,17 +1,10 @@
-<div class="grid grid-cols-2 p-2">
-    <div>
-        {% if record_title%}
-            <p>
-                <a class="font-bold underline hover:text-green-500" href="{% url 'game_info' record.game.id %}" title="">{{ record.game.name }}</a>
-            </p>
-        {% endif %}
-        {% if record.name %}
-            <p class="italic text-xl">{{ record.name }}</p>
-        {% endif %}
-    </div>
+<div class="flex flex-col gap-4 p-2">
+    <p class="italic text-gold text-2xl text-center font-bold my-1">{{ record.name }} {% if show_game %}({{ record.game.name }}){% endif %}</p>
 
-    <a class="row-span-2 my-auto ml-2" target="_blank" href="{{ record.image.url }}" title="">
-        <img class="max-h-80" src="{{ record.image.url }}" alt="">
-    </a>
-    <p>{{ record.description }}</p>
+    <div class="">
+        <a class="" target="_blank" href="{{ record.image.url }}" title="">
+            <img class="mx-auto max-h-80" src="{{ record.image.url }}" alt="">
+        </a>
+    </div>
+    <p class="max-w-prose text-center italic mx-auto">{{ record.description|safe }}</p>
 </div>

@@ -4,36 +4,38 @@
 {% block title %}{{ game.name }}{% endblock %}
 
 {% block content %}
-    <section class="flex flex-col w-full mx-auto flex-grow">
-        <div class="p-2">
-            <p class="text-2xl font-bold text-center">{{ game.name }}</p>
-            <p class="text-sm italic text-center">{{ game.date }}</p>
-        </div>
-        <div class="w-full mx-auto p-4 flex flex-col">
+    <section class="block my-4">
+        {% include "website/partials/hero.html" with title=game.name big="big"%}
+        <div class="w-full mx-auto p-4 flex flex-col text-xl">
             <div class="flex items-center mx-2 p-2 justify-center">
                 <div class="flex my-4 mx-4 items-center text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="white" viewBox="0 0 24 24" stroke="red">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <p class="ml-2 text-center">Fecha: <span class="font-bold text-red">{{ game.date }}</span></p>
+                </div>
+
+                <div class="flex my-4 mx-4 items-center text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline-block" fill="none" viewBox="0 0 24 24" stroke="orange">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <p class="ml-2 text-center"><span class="italic">Duración total:</span> <span class="font-bold">{{ game.duration }}</span></p>
+                    <p class="ml-2 text-center">Duración total: <span class="font-bold text-orange">{{ game.duration }}</span></p>
                 </div>
+
                 <div class="flex my-4 mx-4 items-center text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="green" viewBox="0 0 502.84251 877.78864">
+                        <g id="layer1" transform="translate(-97.15 -70.611)">
+                        <path id="path6257" d="m348.37 687.4c-2.1098 9.7643-14.679 18.452-32.499 24.207-36.373 12.435-76.619 23.773-102.79 40.848-21.333 14.601-25.313 32.611-24.651 49.539 0.42488 5.5525 1.5558 10.979 3.3052 16.468h313.66c7.2824-23.627 4.9174-49.818-27.397-70.09-32.098-18.874-83.95-28.649-117.96-46.634-6.2899-4.2911-10.194-9.4274-11.67-14.34zm-132.78-334.99c2.2877 3.4521 4.726 6.8262 7.3648 10.091 31.041 38.451 77.294 61.565 111.28 97.286 7.947 10.734 12.67 23.668 14.282 36.881 2.9195-24.914 18.226-47.143 39.455-60.155 32.676-25.333 70.084-49.754 93.373-84.103h-265.75zm114.89 114.17m206.61 389.33h-377.03l-1.4222-5.5579c-1.6202-6.3271-38.631-155.89 49.467-236.8 32.582-29.922 56.151-47.203 71.746-58.638 26.256-19.247 30.986-22.716 30.986-46.3 0-23.587-4.7298-27.055-30.986-46.301-15.597-11.435-39.164-28.713-71.746-58.637-88.097-80.906-51.087-230.47-49.467-236.8l1.4222-5.5596h377.03l1.4222 5.5596c1.6202 6.3255 38.631 155.89-49.465 236.8-32.585 29.924-56.154 47.202-71.749 58.637-26.256 19.245-30.986 22.713-30.986 46.301 0 23.584 4.7298 27.053 30.986 46.3 15.597 11.435 39.164 28.716 71.749 58.638 88.096 80.906 51.084 230.47 49.465 236.8l-1.4222 5.5579zm-365.37-14.782h353.72c5.697-27.507 26.081-150.14-46.385-216.69-31.981-29.369-54.239-45.686-70.491-57.602-26.942-19.751-37.025-27.142-37.025-58.219 0-31.078 10.083-38.469 37.025-58.222 16.252-11.915 38.509-28.232 70.491-57.602 72.561-66.638 52.106-189.19 46.39-216.69h-353.72c-5.6987 27.508-26.083 150.14 46.382 216.69 31.981 29.371 54.237 45.688 70.489 57.602 26.942 19.754 37.027 27.145 37.027 58.222 0 31.078-10.083 38.469-37.027 58.219-16.252 11.916-38.509 28.233-70.489 57.602-72.559 66.64-52.103 189.19-46.386 216.69zm428.28 67.841c0-21.775-17.651-39.423-39.423-39.423h-424c-21.772 0-39.423 17.648-39.423 39.423 0 21.77 17.651 39.423 39.423 39.423h424c21.772 0 39.423-17.652 39.423-39.423zm0-798.94c0-21.772-17.651-39.421-39.423-39.421h-424c-21.772 0-39.423 17.649-39.423 39.421s17.651 39.423 39.423 39.423h424c21.772 0 39.423-17.651 39.423-39.423z"/>
+                        </g>
                     </svg>
-                    <p class="ml-2 text-center"><span class="italic">Turno medio:</span> <span class="font-bold">{{ game.avg_seconds_per_turn }} seg</span></p>
-                </div>
 
+                    <p class="ml-2 text-center">Turno medio: <span class="font-bold text-green">{{ game.avg_seconds_per_turn }} seg</span></p>
+                </div>
             </div>
-            <div class="w-full flex flex-col my-2 mx-2 p-4 text-center bg-opacity-50 bg-gray-300">
-                <div class="flex mx-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    <p class="font-bold mx-2">Posiciones {% if game.draw %}<span class="italic text-sm">(empate)</span>{% endif %}</p>
-                </div>
-
+        </div>
+        <div class="w-full mx-auto p-4 flex flex-col">
+            <div class="w-full flex flex-col mx-2 p-4">
+                {% include "website/partials/hero.html" with title="Posiciones" %}
                 <div class="grid grid-cols-2">
                     {% for player_in_game in players_in_game %}
                         {% if forloop.counter < 4 %}
@@ -41,37 +43,39 @@
                                 <div class="flex">
                                     {% include "website/partials/meeple.html" with color=player_in_game.color|lower size=10 %}
                                 </div>
-                                <div class="text-left mx-auto flex {% if forloop.counter is 1 %}text-2xl{% else %}text-xl{% endif %} text-{% get_color_conversion player_in_game.color %}">
+                                <div class="text-left mx-auto flex {% if forloop.counter is 1 %}text-2xl{% else %}text-xl{% endif %} text-{{ player_in_game.color|lower }}">
                                     <span class="inline-block">{{ player_in_game.position }}º</span>
                                     <span class="inline-block mx-2 {% if forloop.counter is 1 %}font-extrabold{% else %}font-bold{% endif %}">{{ player_in_game.player.name }} ({{ player_in_game.score }})</span>
+                                </div>
+                            </div>
                         {% else %}
                             <div class="flex items-center my-2 mx-auto">
                                 <div class="flex">
                                     {% include "website/partials/meeple.html" with color=player_in_game.color|lower size=6 %}
                                 </div>
-                                <div class="text-left mx-auto flex text-md text-{% get_color_conversion player_in_game.color %}">
+                                <div class="text-left mx-auto flex text-md text-{{ player_in_game.color|lower }}">
                                     <span class="inline-block">{{ player_in_game.position }}º</span>
                                     <span class="inline-block mx-2">{{ player_in_game.player.name }} ({{ player_in_game.score }})</span>
-                        {% endif %}
                                 </div>
                             </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
             
         </div>
-
         {% if expansions_in_game %}
+            {% include "website/partials/hero.html" with title="Expansiones" %}
             {% include 'website/partials/expansions_box.html' %}
         {% endif %}
-
         {% if game_images %}
+            {% include "website/partials/hero.html" with title="Imágenes" %}
             {% include 'website/partials/images_box.html' %}
         {% endif %}
 
         {% if records %}
+            {% include "website/partials/hero.html" with title="Récords" %}
             {% include 'website/partials/records_box.html' %}
         {% endif %}
-
     </section>
 {% endblock %}

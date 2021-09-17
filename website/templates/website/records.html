@@ -5,8 +5,10 @@
 {% block title %}Records{% endblock %}
 
 {% block content %}
-    {% include 'website/partials/records_box.html' %}
-    <div class="w-full max-w-sm mx-auto my-2">
-        <a href="{% url 'add_record'%}" class="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full text-center">Añadir Récord</a>
+
+    <div class="block">
+        {% include "website/partials/hero.html" with title="Records" big="big"%}
+        {% include "website/partials/achievements.html" %}
+        {% include 'website/partials/records_box.html' with show_game=True %}
     </div>
 {% endblock %}
