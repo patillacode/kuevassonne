@@ -88,8 +88,7 @@ python manage.py runserver
 
 ```bash
 # if you are developing you need to run the following in another terminal
-# this will keep compiling styles.css in dist.css
-# To avoid permanently having to run "collectstatic" I recommend doing a symlink like so:
-# ln -s website/static ./static
+# this will keep compiling website/static/css/styles.css into website/static/css/dist.css
+# after each change in styles.css for your benefit
 make create-styles-dev
 ```
