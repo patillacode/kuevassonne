@@ -9,7 +9,6 @@ python-install:
 	pip install -r requirements.txt
 
 docker-setup:
-	. venv/bin/activate && \
 	python manage.py collectstatic --no-input && \
 	python manage.py migrate
 

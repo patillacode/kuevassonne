@@ -45,7 +45,7 @@ cd kuevassonne
 # run the install command
 make install
 
-# and then after you know your DB is in order
+# migrate and generate statics
 make statics-and-migrations
 ```
 
@@ -81,5 +81,15 @@ python manage.py migrate
 ```bash
 # this should make the app accessible under http://localhost:8000
 python manage.py runserver
+```
 
+
+### Only if developing on the frontend
+
+```bash
+# if you are developing you need to run the following in another terminal
+# this will keep compiling styles.css in dist.css
+# To avoid permanently having to run "collectstatic" I recommend doing a symlink like so:
+# ln -s website/static ./static
+make create-styles-dev
 ```
