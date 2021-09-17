@@ -2,24 +2,24 @@
     <table class="mx-auto table-auto border-collapse">
       <thead>
         <tr>
-            <th class="text-gold border border-white py-1 px-2">Número de Oros</th>
-            <th class="text-silver border border-white py-1 px-2">Número de Platas</th>
-            <th class="text-orange border border-white py-1 px-2">Mejor Win Rate</th>
-            <th class="text-green border border-white py-1 px-2">Mejor Posición Media</th>
-            <th class="text-blue border border-white py-1 px-2">Mejor Racha Ganadora</th>
-            <th class="text-pink border border-white py-1 px-2">Peor Racha Perdedora</th>
-            <th class="text-red border border-white py-1 px-2">Colistas</th>
+            <th class="bg-gold border border-white py-1 px-2">Número de Oros</th>
+            <th class="bg-silver border border-white py-1 px-2">Número de Platas</th>
+            <th class="bg-orange border border-white py-1 px-2">Mejor Win Rate</th>
+            <th class="bg-green border border-white py-1 px-2">Mejor Posición Media</th>
+            <th class="bg-blue border border-white py-1 px-2">Mejor Racha Ganadora</th>
+            <th class="bg-pink border border-white py-1 px-2">Peor Racha Perdedora</th>
+            <th class="bg-red border border-white py-1 px-2">Colistas</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-            <td class="text-center text-gold py-1 px-2 border border-white">{{achievements.most_golds.player_name}} {{achievements.most_golds.value}}</td>
-            <td class="text-center text-silver py-1 px-2 border border-white">{{achievements.most_silvers.player_name}} {{achievements.most_silvers.value}}</td>
-            <td class="text-center text-orange py-1 px-2 border border-white">{{achievements.best_wr.player_name}} {{achievements.best_wr.value}}% ({{ achievements.best_wr.number_of_games }})</td>
-            <td class="text-center text-green py-1 px-2 border border-white">{{achievements.best_average.player_name}} {{achievements.best_average.value}}</td>
-            <td class="text-center text-blue py-1 px-2 border border-white">{{achievements.best_win_streak.player_name}} {{achievements.best_win_streak.value}}</td>
-            <td class="text-center text-pink py-1 px-2 border border-white">{{achievements.worst_loss_streak.player_name}} {{achievements.worst_loss_streak.value}}</td>
-            <td class="text-center text-red py-1 px-2 border border-white">{{achievements.most_losses.player_name}} {{achievements.most_losses.value}}</td>
+            <td class="text-center py-1 px-2 border border-white">{{achievements.most_golds.player_name}} <span class="font-bold">{{achievements.most_golds.value}}</span></td>
+            <td class="text-center py-1 px-2 border border-white">{{achievements.most_silvers.player_name}} <span class="font-bold">{{achievements.most_silvers.value}}</span></td>
+            <td class="text-center py-1 px-2 border border-white">{{achievements.best_wr.player_name}} <span class="font-bold">{{achievements.best_wr.value}}</span>% ({{ achievements.best_wr.number_of_games }})</td>
+            <td class="text-center py-1 px-2 border border-white">{{achievements.best_average.player_name}} <span class="font-bold">{{achievements.best_average.value}}</span></td>
+            <td class="text-center py-1 px-2 border border-white">{{achievements.best_win_streak.player_name}} <span class="font-bold">{{achievements.best_win_streak.value}}</span></td>
+            <td class="text-center py-1 px-2 border border-white">{{achievements.worst_loss_streak.player_name}} <span class="font-bold">{{achievements.worst_loss_streak.value}}</span></td>
+            <td class="text-center py-1 px-2 border border-white">{{achievements.most_losses.player_name}} <span class="font-bold">{{achievements.most_losses.value}}</span></td>
         </tr>
       </tbody>
     </table>

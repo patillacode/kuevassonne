@@ -29,6 +29,7 @@ def games(request, feedback_message=None):
             {
                 'id': game.id,
                 'draw': game.draw,
+                'start_date': game.start_date.strftime('%d %b %Y'),
                 'game_players': game.game_players.all().order_by('-score'),
                 'remaining_spots': range(
                     settings.MAX_NUMBER_OF_PLAYERS - game.game_players.count()

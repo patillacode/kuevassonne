@@ -32,7 +32,7 @@ module.exports = {
         yellow: '#cccb00',
         brown: '#7a470a',
         orange: '#e66e19',
-        red: '#8a0000',
+        red: '#ac0000',
         winter: '#e6dada',
         dark: '#274046'
       },

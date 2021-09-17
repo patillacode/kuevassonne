@@ -20,26 +20,26 @@
                     {% include "website/partials/hero.html" with title=player.name %}
                     {% with player.favourite_color|lower as favourite_color %}
                         <div class="flex flex-col gap-4 items-center font-bold text-xl text-{{ favourite_color }}">
-                            <p class="flex items-center justify-between">{% include "website/partials/meeple.html" with color=favourite_color size=8 %}</p>
+                            <p class="flex items-center justify-between">{% include "website/partials/meeple.html" with color=favourite_color size=10 %}</p>
                         </div>
                     {% endwith %}
                     <table class="table-auto border-collapse col-span-2">
                       <thead>
                         <tr class="">
-                            <th class="games-cell">Jugadas</th>
-                            <th class="games-cell">Ganadas</th>
-                            <th class="games-cell">Farolillos</th>
-                            <th class="games-cell">Posición Media</th>
-                            <th class="games-cell">WR</th>
+                            <th class="bg-black games-cell">Jugadas</th>
+                            <th class="bg-gold games-cell">Ganadas</th>
+                            <th class="bg-red games-cell">Farolillos</th>
+                            <th class="bg-green games-cell">Posición Media</th>
+                            <th class="bg-orange games-cell">WR</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr class="text-center">
-                            <td class="text-silver games-cell font-bold text-lg">{{ player.games_played }}</td>
-                            <td class="text-gold games-cell font-bold text-lg">{{ player.wins }}</td>
-                            <td class="text-red games-cell font-bold text-lg">{{ player.losses }}</td>
-                            <td class="text-green games-cell font-bold text-lg">{{ player.average_position }}</td>
-                            <td class="text-orange games-cell font-bold text-lg">{{ player.win_rate }}%</td>
+                            <td class="games-cell font-bold text-lg">{{ player.games_played }}</td>
+                            <td class="games-cell font-bold text-lg">{{ player.wins }}</td>
+                            <td class="games-cell font-bold text-lg">{{ player.losses }}</td>
+                            <td class="games-cell font-bold text-lg">{{ player.average_position }}</td>
+                            <td class="games-cell font-bold text-lg">{{ player.win_rate }}%</td>
                         </tr>
                       </tbody>
                     </table>
