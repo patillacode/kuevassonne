@@ -162,6 +162,7 @@ a:hover {
 }
 .hero h1.big {
   font-size: clamp(32px, 16.4px + 4.88vw, 110px);
+  margin-bottom: 2rem;
 }
 
 /* Main */
