@@ -84,7 +84,7 @@ python manage.py runserver
 ```
 
 
-### Only if developing on the frontend
+### Only if developing CSS
 
 ```bash
 # if you are developing you need to run the following in another terminal
