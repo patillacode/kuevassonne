@@ -1,10 +1,10 @@
-<div class="flex flex-col gap-4 p-2">
-    <p class="italic text-gold text-2xl text-center font-bold my-1">{{ record.name }} {% if show_game %}({{ record.game.name }}){% endif %}</p>
+<div class="flex flex-col gap-4 p-2 mx-auto">
 
-    <div class="">
-        <a class="" target="_blank" href="{{ record.image.url }}" title="">
-            <img class="mx-auto max-h-80" src="{{ record.image.url }}" alt="">
-        </a>
-    </div>
-    <p class="max-w-prose text-center italic mx-auto">{{ record.description|safe }}</p>
+    <p class="italic text-gold text-2xl text-center font-bold my-1">{{ record.name }} {% if show_game %}<a target="_blank" class="hover:text-white" href="{% url 'game_info' record.game.id %}">(#{{ record.game.id }})</a>{% endif %}</p>
+
+    <a target="_blank" href="{{ record.image.url }}" title="" class="w-full card-zoom max-h-96 max-w-max mx-auto">
+      <img class="card-zoom-image" src="{{ record.image.url }}" alt="" />
+      <p class="card-zoom-text w-full">{{ record.description|safe }}</p>
+    </a>
+
 </div>

@@ -76,12 +76,18 @@ class ImageForm(forms.ModelForm):
             'name': forms.TextInput(
                 attrs={
                     'class': (
-                        'appearance-none bg-transparent border-none w-full'
-                        ' text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none'
+                        'appearance-none focus:outline-none text-white bg-transparent w-full my-2'
                     ),
                     'placeholder': 'Nombre de la imagen (opcional)',
                 }
-            )
+            ),
+            'image': forms.ClearableFileInput(
+                attrs={
+                    'class': (
+                        'appearance-none focus:outline-none text-white bg-transparent w-full my-2'
+                    ),
+                }
+            ),
         }
 
 
@@ -93,11 +99,16 @@ class RecordForm(forms.ModelForm):
             'name': forms.TextInput(
                 attrs={
                     'class': (
-                        'appearance-none bg-transparent w-full'
-                        ' text-gray-700 mx-auto py-1 px-2 leading-tight'
-                        ' focus:outline-none border-b-2 border-solid border-black'
+                        'appearance-none focus:outline-none text-white bg-transparent w-full my-2'
                     ),
-                    'placeholder': 'Nombre del récord (opcional)',
+                    'placeholder': 'Nombre del récord',
+                }
+            ),
+            'image': forms.ClearableFileInput(
+                attrs={
+                    'class': (
+                        'appearance-none focus:outline-none text-white bg-transparent w-full my-2'
+                    ),
                 }
             ),
             'game': forms.Select(
@@ -105,9 +116,7 @@ class RecordForm(forms.ModelForm):
                     'class': (
                         'inline-flex justify-center w-full rounded-md border'
                         ' border-gray-300 shadow-sm mx-auto px-4 py-2 bg-white text-sm'
-                        ' font-medium text-gray-700 hover:bg-gray-50 focus:outline-none'
-                        ' focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100'
-                        ' focus:ring-yellow-500'
+                        ' focus:outline-none text-black'
                     )
                 }
             ),
@@ -115,7 +124,7 @@ class RecordForm(forms.ModelForm):
                 attrs={
                     'class': (
                         'w-full p-2 text-gray-700 border rounded-lg focus:outline-none'
-                        ' mx-auto'
+                        ' mx-auto mb-4'
                     ),
                     'placeholder': 'Descripción del récord...',
                 }

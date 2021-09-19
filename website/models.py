@@ -150,22 +150,6 @@ class Game(models.Model):
 
         # set some data for the players too
 
-        # Wins
-        max_points = max(list(players_in_game.values_list('score', flat=True)))
-        winners = players_in_game.filter(score=max_points)
-        # In case there is a draw for first place, both players get a win
-        for winner in winners:
-            winner.player.wins += 1
-            winner.player.save()
-
-        # Losses
-        min_points = min(list(players_in_game.values_list('score', flat=True)))
-        losers = players_in_game.filter(score=min_points)
-        # In case there is a draw for last place, both players get a loss
-        for loser in losers:
-            loser.player.losses += 1
-            loser.player.save()
-
         # Positions
         previous_player = None
         for position, player_in_game in enumerate(players_in_game, 1):
@@ -179,6 +163,21 @@ class Game(models.Model):
 
             player_in_game.save()
             previous_player = player_in_game
+
+        # Wins
+        # recalculate wins for all players in this game
+        for player_in_game in players_in_game:
+            player = player_in_game.player
+            player.wins = PlayerInGame.objects.filter(player=player, position=1).count()
+            player.save()
+
+        # Losses
+        min_points = min(list(players_in_game.values_list('score', flat=True)))
+        losers = players_in_game.filter(score=min_points)
+        # In case there is a draw for last place, both players get a loss
+        for loser in losers:
+            loser.player.losses += 1
+            loser.player.save()
 
         # Win Rate
         for player_in_game in players_in_game:

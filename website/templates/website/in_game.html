@@ -60,9 +60,9 @@
     <div class="mb-8">
         {% include "website/partials/hero.html" with title="Añadir Imagen" %}
         <div class="flex w-full max-w-sm mx-auto my-2 py-4 ">
-            <form class="" action="{% url 'in_game' game.id %}" method="post" class="flex" enctype="multipart/form-data">
+            <form class="" action="{% url 'in_game' game.id %}" method="post" class="flex" enctype="multipart/form-data" autocomplete="off">
                 {% csrf_token %}
-                <div class="grid grid-cols-3">
+                <div class="flex flex-col">
                     <div class="col-span-2">
                         {{ images_form.name }}
                         {{ images_form.image }}

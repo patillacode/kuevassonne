@@ -370,3 +370,19 @@ a:hover {
     opacity: 0.95;
   }
 }
+
+.card-zoom {
+  @apply relative flex items-center justify-center overflow-hidden shadow-xl rounded-2xl;
+}
+.card-zoom-image {
+  @apply object-cover w-full h-full transition-all duration-500 ease-in-out transform;
+}
+.card-zoom-text {
+  @apply absolute text-xl text-opacity-0 transition-all duration-500 ease-in-out transform text-black bg-black bg-opacity-0 rounded-2xl p-4;
+}
+.card-zoom:hover .card-zoom-image {
+  @apply scale-150;
+}
+.card-zoom:hover .card-zoom-text {
+  @apply scale-90 text-opacity-100 text-white bg-opacity-80;
+}

@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Max
 from .models import Game, Player, PlayerInGame
 
 
@@ -94,20 +94,27 @@ def get_achievements():
         .first()
     )
 
-    most_golds_player = (
-        all_players_in_game.filter(position=1)
-        .values('player__name', 'position')
-        .annotate(num_golds=Count('id'))
-        .order_by('-num_golds', '-player__win_rate')
-        .first()
+    most_golds = Player.objects.aggregate(most_golds=Max('wins')).get('most_golds')
+    most_golds_names = ' & '.join(
+        Player.objects.filter(wins=most_golds)
+        .order_by('name')
+        .values_list('name', flat=True)
     )
 
-    most_silvers_player = (
-        all_players_in_game.filter(position=2)
-        .values('player__name', 'position')
-        .annotate(num_silvers=Count('id'))
-        .order_by('-num_silvers', 'player__average_position', '-player__win_rate')
-        .first()
+    most_silvers = (
+        PlayerInGame.objects.filter(position=2)
+        .values('player__name')
+        .annotate(num_silvers=Count('player__name'))
+        .aggregate(most_silvers=Max('num_silvers'))
+        .get('most_silvers')
+    )
+    most_silvers_names = ' & '.join(
+        PlayerInGame.objects.filter(position=2)
+        .values('player__name')
+        .annotate(num_silvers=Count('player__name'))
+        .filter(num_silvers=most_silvers)
+        .order_by('player__name')
+        .values_list('player__name', flat=True)
     )
 
     achievements = {
@@ -121,12 +128,12 @@ def get_achievements():
             'value': most_regular_player.average_position,
         },
         'most_golds': {
-            'player_name': most_golds_player['player__name'],
-            'value': most_golds_player['num_golds'],
+            'player_name': most_golds_names,
+            'value': most_golds,
         },
         'most_silvers': {
-            'player_name': most_silvers_player['player__name'],
-            'value': most_silvers_player['num_silvers'],
+            'player_name': most_silvers_names,
+            'value': most_silvers,
         },
         'most_losses': {
             'player_name': most_losses_player.name,
