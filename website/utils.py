@@ -2,73 +2,64 @@ from django.db.models import Count, Max
 from .models import Game, Player, PlayerInGame
 
 
+def get_player_max_win_streak(player):
+    max_streak = 0
+    current_streak = 0
+
+    player_positions = list(
+        PlayerInGame.objects.filter(player=player)
+        .order_by('game__id')
+        .values_list('position', flat=True)
+    )
+
+    for position in player_positions:
+        if position == 1:
+            current_streak += 1
+        else:
+            current_streak = 0
+
+        if current_streak > max_streak:
+            max_streak = current_streak
+
+    return max_streak
+
+
+def get_player_max_loss_streak(player):
+    max_streak = 0
+    current_streak = 0
+
+    players_in_game = PlayerInGame.objects.filter(player=player).order_by('game__id')
+
+    for player_in_game in players_in_game:
+        if player_in_game.position == player_in_game.game.game_players.count():
+            current_streak += 1
+        else:
+            current_streak = 0
+
+        if current_streak > max_streak:
+            max_streak = current_streak
+
+    return max_streak
+
+
 def get_achievements():
-    all_games = Game.objects.filter(finalised=True)
     all_players = Player.objects.all()
-    all_players_in_game = PlayerInGame.objects.all()
 
-    streak_data = {
-        player.name: {
-            'current_win_streak': 0,
-            'max_win_streak': 0,
-            'current_loss_streak': 0,
-            'max_loss_streak': 0,
-        }
-        for player in all_players
+    win_streak_data = {
+        player.name: get_player_max_win_streak(player) for player in all_players
     }
-    previous_winner = None
-    previous_loser = None
+    max_win_streak = max(win_streak_data.values())
+    win_streak_names = [
+        key for key, value in win_streak_data.items() if value == max_win_streak
+    ]
 
-    for game in all_games:
-        winner = game.game_players.order_by('-score').first().player.name
-        if (
-            winner == previous_winner
-            or streak_data[winner]['current_win_streak'] == 0  # noqa: W503
-        ):
-            streak_data[winner]['current_win_streak'] += 1
-            if (
-                streak_data[winner]['current_win_streak']
-                > streak_data[winner]['max_win_streak']  # noqa: W503
-            ):
-                streak_data[winner]['max_win_streak'] += 1
-        else:
-            streak_data[winner]['current_win_streak'] = 1
-
-        previous_winner = winner
-
-        loser = game.game_players.order_by('score').first().player.name
-        if (
-            loser == previous_loser
-            or streak_data[loser]['current_loss_streak'] == 0  # noqa: W503
-        ):
-            streak_data[loser]['current_loss_streak'] += 1
-            if (
-                streak_data[loser]['current_loss_streak']
-                > streak_data[loser]['max_loss_streak']  # noqa: W503
-            ):
-                streak_data[loser]['max_loss_streak'] += 1
-        else:
-            streak_data[loser]['current_loss_streak'] = 1
-
-        previous_loser = loser
-
-    max_win_streak = 0
-    max_loss_streak = 0
-
-    for streak_values in streak_data.values():
-        if streak_values['max_win_streak'] > max_win_streak:
-            max_win_streak = streak_values['max_win_streak']
-        if streak_values['max_loss_streak'] > max_loss_streak:
-            max_loss_streak = streak_values['max_loss_streak']
-
-    win_streak_names = []
-    loss_streak_names = []
-
-    for name, streak_values in streak_data.items():
-        if streak_values['max_win_streak'] == max_win_streak:
-            win_streak_names.append(name)
-        if streak_values['max_loss_streak'] == max_loss_streak:
-            loss_streak_names.append(name)
+    loss_streak_data = {
+        player.name: get_player_max_loss_streak(player) for player in all_players
+    }
+    max_loss_streak = max(loss_streak_data.values())
+    loss_streak_names = [
+        key for key, value in loss_streak_data.items() if value == max_loss_streak
+    ]
 
     best_win_streak = {
         'player_name': ' & '.join(win_streak_names),
