@@ -64,6 +64,7 @@ body {
   }
 }
 
+input:hover,
 a:hover {
   cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/836/hearthstone-click.png)
       10 2,
