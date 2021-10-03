@@ -670,13 +670,17 @@ video {
 }
 
 .block {
-  /*background: rgba(66, 66, 66, 0.8);*/
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
   --tw-gradient-from: #274046;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(39, 64, 70, 0));
   --tw-gradient-to: #111111;
   border-radius: 20px;
   padding: 20px;
+}
+
+.block > * {
+  -webkit-animation: fade-in 1s ease;
+          animation: fade-in 1s ease;
 }
 
 .sr-only {
@@ -25626,6 +25630,26 @@ video {
 }
 
 /* Tailwind components */
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
 
 /* Scrollbars */
 

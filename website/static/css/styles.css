@@ -33,10 +33,21 @@
     transform: scale(1.025);
   }
   .block {
-    /*background: rgba(66, 66, 66, 0.8);*/
     @apply bg-gradient-to-b from-dark to-black;
     border-radius: 20px;
     padding: 20px;
+  }
+  .block > * {
+    animation: fade-in 1s ease;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
