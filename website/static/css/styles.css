@@ -40,6 +40,20 @@
   }
 }
 
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a88a50;
+}
+
 html {
   height: 100%;
 }
