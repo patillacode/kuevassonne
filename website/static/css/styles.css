@@ -40,7 +40,12 @@
   }
 }
 
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   background: url('/static/assets/backgrounds/main.jpg') no-repeat fixed center /
     cover;
   color: #f9f9f9;
