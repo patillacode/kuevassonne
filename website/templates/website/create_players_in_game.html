@@ -5,7 +5,7 @@
 
 {% block content %}
     
-    <section class="block">
+    <section class="block m-auto">
         {% include "website/partials/hero.html" with title="Elegir Participantes" %}
         <form class="w-full max-w-sm mx-auto" action="{% url 'create_players_in_game' game_id %}" method="post">
             {% csrf_token %}

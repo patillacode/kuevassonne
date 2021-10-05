@@ -10,12 +10,11 @@
 {% block content %}
 <section class="block flex flex-col w-full mx-auto">
     {% include "website/partials/hero.html" with title="Jugadores" big="big"%}
-
     {% include "website/partials/achievements.html" %}
 
-    <div class="grid grid-cols-2 gap-4 w-full p-4 m-2">
+    <div class="flex flex-col lg:grid lg:grid-cols-2 gap-1 lg:gap-4 w-full p-1 lg:p-4">
         {% for player in players_global %}
-            <div class="grid grid-rows-3 border-2 border-solid border-black p-4 bg-opacity-10 bg-white">
+            <div class="flex flex-col border-2 border-solid border-black w-full mx-auto lg:p-4 bg-opacity-10 bg-white">
                 <div class="grid grid-cols-2 gap-4 col-span-2 items-center">
                     {% include "website/partials/hero.html" with title=player.name %}
                     {% with player.favourite_color|lower as favourite_color %}
@@ -23,7 +22,7 @@
                             <p class="flex items-center justify-between">{% include "website/partials/meeple.html" with color=favourite_color size=10 %}</p>
                         </div>
                     {% endwith %}
-                    <table class="table-auto border-collapse col-span-2">
+                    <table class="hidden lg:table table-auto border-collapse col-span-2">
                       <thead>
                         <tr class="">
                             <th class="bg-black games-cell">Jugadas</th>
@@ -44,7 +43,7 @@
                       </tbody>
                     </table>
                 </div>
-                <div class="bars-chart-container col-span-2 row-span-2">
+                <div class="bars-chart-container col-span-2 row-span-2 my-4">
                     <canvas id="bar-chart-{{player.id}}"></canvas>
                 </div>
             </div>

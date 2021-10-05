@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<section class="block">
+<section class="block m-auto">
     {% include "website/partials/hero.html" with title="Añadir Jugador" %}
     <form class="w-full max-w-sm mx-auto" action="{% url 'create_player'%}" method="post" autocomplete="off">
         {% csrf_token %}

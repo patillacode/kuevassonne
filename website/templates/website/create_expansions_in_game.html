@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    <section class="block">
+    <section class="block m-auto">
         {% include "website/partials/hero.html" with title="Añadir Expansiones" %}
         <form class="w-full max-w-md mx-auto" action="{% url 'create_expansions_in_game' game_id %}" method="post">
             {% csrf_token %}
