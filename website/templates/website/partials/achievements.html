@@ -1,4 +1,4 @@
-<section class="my-4 overflow-x-scroll">
+<section class="my-4 hidden md:block">
   <table class="mx-auto table-auto border-collapse">
     <thead>
       <tr>
@@ -31,8 +31,8 @@
         </td>
         <td class="text-center py-1 px-2 border border-white">
           {{achievements.best_wr.player_name}}
-          <span class="font-bold">{{achievements.best_wr.value}}</span>% ({{
-          achievements.best_wr.number_of_games }})
+          <span class="font-bold">{{achievements.best_wr.value}}</span>%
+          ({{achievements.best_wr.number_of_games}})
         </td>
         <td class="text-center py-1 px-2 border border-white">
           {{achievements.best_average.player_name}}

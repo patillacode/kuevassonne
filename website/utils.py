@@ -1,5 +1,5 @@
 from django.db.models import Count, Max
-from .models import Game, Player, PlayerInGame
+from .models import Player, PlayerInGame
 
 
 def get_player_max_win_streak(player):

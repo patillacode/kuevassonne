@@ -1,4 +1,4 @@
-<div class="grid gap-2 {% if records.count > 1 %}xl:grid-cols-2 grid-cols-1{% else %}grid-cols-1{% endif %} mt-4">
+<div class="w-full grid grid-cols-1 gap-2 {% if records.count > 1 %}lg:grid-cols-2{% endif %} mt-4 mx-auto">
     {% for record in records %}
         {% include 'website/partials/record.html' with record=record show_game=show_game%}
     {% endfor %}
