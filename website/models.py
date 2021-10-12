@@ -68,7 +68,8 @@ class Player(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.name = ''.join(self.name.split())
+        if self._state.adding is True:
+            self.name = ''.join(self.name.split())
         super().save(*args, **kwargs)
 
 
@@ -164,36 +165,30 @@ class Game(models.Model):
             player_in_game.save()
             previous_player = player_in_game
 
-        # Wins
-        # recalculate wins for all players in this game
+        # Wins & Losses & Win Rate & AVG Position: recalculate for all players in game
+        min_points_in_game = min(list(players_in_game.values_list('score', flat=True)))
         for player_in_game in players_in_game:
             player = player_in_game.player
+
+            # Wins
             player.wins = PlayerInGame.objects.filter(player=player, position=1).count()
-            player.save()
 
-        # Losses
-        min_points = min(list(players_in_game.values_list('score', flat=True)))
-        losers = players_in_game.filter(score=min_points)
-        # In case there is a draw for last place, both players get a loss
-        for loser in losers:
-            loser.player.losses += 1
-            loser.player.save()
+            # Losses
+            if player_in_game.score == min_points_in_game:
+                player.losses += 1
 
-        # Win Rate
-        for player_in_game in players_in_game:
-            player = player_in_game.player
+            # Win Rate
             games_played = player.games.count()
             player.win_rate = round((player.wins / games_played) * 100, 2)
-            player.save()
 
-        # Average Position
-        for player in Player.objects.all():
+            # Average Position
             average = (
                 PlayerInGame.objects.filter(player=player)
                 .values('player__name')
                 .annotate(average=models.Avg('position'))[0]['average']
             )
             player.average_position = round(average, 2)
+
             player.save()
 
         self.finalised = True
