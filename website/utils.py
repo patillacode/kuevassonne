@@ -44,6 +44,8 @@ def get_player_max_loss_streak(player):
 
 def get_achievements():
     all_players = Player.objects.all()
+    if not all_players:
+        return {}
 
     win_streak_data = {
         player.name: get_player_max_win_streak(player) for player in all_players

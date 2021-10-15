@@ -92,3 +92,6 @@ python manage.py runserver
 # after each change in styles.css for your benefit
 make create-styles-dev
 ```
+
+### Docker
+Check the [Docker README](https://github.com/patillacode/kuevassonne/blob/main/Docker_README.md)
