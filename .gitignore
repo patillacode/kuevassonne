@@ -135,3 +135,5 @@ media/*
 static/*
 static
 database_backup.sql
+
+.vscode/

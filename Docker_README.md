@@ -44,5 +44,5 @@ docker exec -it kuevassonne_website_1 /bin/sh
 python manage.py createsuperuser --noinput
 ```
 
-At this point you should be able to access the site at `http://localhost:5055/`
-Remember you would need to add the expansions you want through the admin: `http://localhost:5055/admin/`
+At this point you should be able to access the site at `http://localhost:5555/`
+Remember you would need to add the expansions you want through the admin: `http://localhost:5555/admin/`
